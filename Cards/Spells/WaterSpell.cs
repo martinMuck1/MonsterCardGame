@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    abstract class AbstractMonster : AbstractCard
+    class WaterSpell : AbstractSpell  
     {
-        protected AbstractMonster(string name, int damage, ElementType element):base(name,damage,element)
+        public WaterSpell(int strenght) : base("WaterSpell", strenght, ElementType.water)
         {
+            //Console.WriteLine("Here comes WaterGoblin");
         }
 
     }

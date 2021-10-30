@@ -12,8 +12,7 @@ namespace MonsterCardGame.Cards
         fire,
         normal 
     }
-
-    abstract class AbstractCard
+    abstract class AbstractCard : ICard
     {
         public string Name { get; private set; }
         public int Damage { get; private set; }     //damage cant be changed
@@ -25,22 +24,34 @@ namespace MonsterCardGame.Cards
             this.Damage = damage;
             this.Element = element;
         }
-        public int AdaptDamage(AbstractCard opponent)
+        public int AdaptDamage(AbstractCard opponent)   // compare card types involved in fight
         {
             int tmpDamage;
-            if (opponent is AbstractMonster) //Compare Monster to Monster
+            if(this is AbstractMonster)
             {
-                tmpDamage = AdaptDamageMonsterOpponent(opponent);
+                if (opponent is AbstractMonster) //Compare Monster to Monster
+                {
+                    tmpDamage = this.Damage;
+                }
+                else                            //Compare Monster to Spell
+                {
+                    tmpDamage = AdaptDamageSpellInvolved(opponent);
+                }
             }
-            else                            //Compare Monster to Spell
+            else
             {
-                tmpDamage = AdaptDamageSpellOpponent(opponent);
+                tmpDamage = AdaptDamageSpellInvolved(opponent);
             }
+            tmpDamage = TestSpecialCases(tmpDamage, opponent);      //special cases like Kraken vs Spell etc.
             return tmpDamage;
         }
 
-        protected abstract int AdaptDamageMonsterOpponent(AbstractCard opponent);
-        protected int AdaptDamageSpellOpponent(AbstractCard opponent)  //logic for Element bonus
+        protected virtual int TestSpecialCases(int tmpDamage, AbstractCard opponent)    //base version => returns damage
+        {
+            return tmpDamage;
+        }
+        //protected abstract int AdaptDamageMonsterVsMonster(AbstractCard opponent);
+        protected int AdaptDamageSpellInvolved(AbstractCard opponent)  //logic for Element bonus
         {
             int tmpDamage = this.Damage;
             if(this.Element == ElementType.fire)

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    abstract class AbstractMonster : AbstractCard
+    class Kraken: AbstractMonster
     {
-        protected AbstractMonster(string name, int damage, ElementType element):base(name,damage,element)
+        public Kraken(int strenght):base("Kraken", strenght, ElementType.water)
         {
+            Console.WriteLine("Release the Kraken!");
         }
 
     }

@@ -26,7 +26,7 @@ namespace MonsterCardGame.DeckManage
 
         public AbstractCard FindCardInStack(AbstractCard card)
         {
-            return new WaterGoblin();
+            return new WaterGoblin(100);
         }
     }
 }

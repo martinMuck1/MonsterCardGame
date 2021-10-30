@@ -11,7 +11,18 @@ namespace MonsterCardGame
         {
             //should be a battle between players
             Fight objFight = new Fight();
-            objFight.RoundFight(new WaterGoblin(), new WaterGoblin());
+            AbstractCard card1 = new WaterGoblin(80);
+            AbstractCard card2 = new FireDragon(100);
+            objFight.RoundFight(ref card1, ref card2);
+            card1 = new WaterSpell(80);
+            card2 = new Kraken(100);
+            objFight.RoundFight(ref card1, ref card2);
+            card1 = new WaterSpell(80);
+            card2 = new FireDragon(100);
+            objFight.RoundFight(ref card1, ref card2);
+            card1 = new WaterSpell(80);
+            card2 = new WaterSpell(80);
+            objFight.RoundFight(ref card1, ref card2);
         }
     }
 }

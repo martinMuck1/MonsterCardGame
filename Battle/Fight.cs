@@ -22,24 +22,26 @@ namespace MonsterCardGame.Battle
 
         }
 
-        public Outcome RoundFight(AbstractCard cardA, AbstractCard cardB)
+        public Outcome RoundFight(ref AbstractCard cardA,ref AbstractCard cardB)
         {
             Outcome tmpOutcome;
-            if(cardA.AdaptDamage(cardB) > cardB.AdaptDamage(cardA))
+            int tmpDamageCardA = cardA.AdaptDamage(cardB);
+            int tmpDamageCardB = cardB.AdaptDamage(cardA);
+
+            if (tmpDamageCardA > tmpDamageCardB)
             {
                 tmpOutcome = Outcome.winnerA;
-                Console.WriteLine($"Winner is: {0}", cardA.Name);
-
+                Console.WriteLine($"Winner is: {cardA.Name} with {tmpDamageCardA} against {tmpDamageCardB}");
             }
-            else if (cardA.AdaptDamage(cardB) < cardB.AdaptDamage(cardA)){
+            else if (tmpDamageCardA < tmpDamageCardB)
+            {
                 tmpOutcome = Outcome.winnerB;
-                Console.WriteLine($"Winner is: {0}", cardB.Name);
-
+                Console.WriteLine($"Winner is: {cardB.Name} with {tmpDamageCardB} against {tmpDamageCardA}");
             }
             else
             {
                 tmpOutcome = Outcome.deuce;
-                Console.WriteLine("No winners today");
+                Console.WriteLine($"No winners today => Damage:  {tmpDamageCardA}");
             }
 
             return tmpOutcome;
