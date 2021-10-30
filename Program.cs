@@ -1,6 +1,7 @@
 ﻿using MonsterCardGame.Cards;
 using MonsterCardGame.Battle;
 using MonsterCardGame.DeckManage;
+using MonsterCardGame.Users;
 using System;
 
 namespace MonsterCardGame
@@ -9,20 +10,22 @@ namespace MonsterCardGame
     {
         static void Main(string[] args)
         {
-            //should be a battle between players
+            User user1 = new User("Martin");
+            User user2 = new User("Amila");
+
+            Fight battle = new Fight(ref user1, ref user2);
+            battle.startFight();
+
+
+
+
+
+            /*
             Fight objFight = new Fight();
             AbstractCard card1 = new WaterGoblin(80);
             AbstractCard card2 = new FireDragon(100);
             objFight.RoundFight(ref card1, ref card2);
-            card1 = new WaterSpell(80);
-            card2 = new Kraken(100);
-            objFight.RoundFight(ref card1, ref card2);
-            card1 = new WaterSpell(80);
-            card2 = new FireDragon(100);
-            objFight.RoundFight(ref card1, ref card2);
-            card1 = new WaterSpell(80);
-            card2 = new WaterSpell(80);
-            objFight.RoundFight(ref card1, ref card2);
+            */
         }
     }
 }

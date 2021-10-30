@@ -14,7 +14,11 @@ namespace MonsterCardGame.Cards
         }
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {
-
+            if(opponent is FireElves)
+            {
+                Console.WriteLine($"{opponent.Name} know all tricks of {this.Name} and could manage to dodge attack!");
+                return 0;
+            }
             return tmpDamage;
         }
     }

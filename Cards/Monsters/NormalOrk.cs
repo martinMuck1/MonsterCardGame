@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class Knight: AbstractMonster
+    class NormalOrk: AbstractMonster
     {
-        public Knight(int strenght):base("Knight", strenght, ElementType.normal)
+        public NormalOrk(int strenght):base("Ork", strenght, ElementType.normal)
         {
-            Console.WriteLine("Knight entered the room");
+            //Console.WriteLine("Knight entered the room");
         }
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {
-            if (opponent is WaterSpell)
+            if (opponent is NormalWizzard)
             {
-                Console.WriteLine($"{this.Name} drowned due to heavy armor in water !");
+                Console.WriteLine($"{this.Name} got hypnothized by {opponent.Name}");
                 return 0;
             }
             return tmpDamage;
