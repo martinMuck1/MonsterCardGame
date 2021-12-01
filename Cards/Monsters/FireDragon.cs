@@ -10,7 +10,6 @@ namespace MonsterCardGame.Cards
     {
         public FireDragon(int strenght) : base("Dragon", strenght, ElementType.fire)
         {
-            Console.WriteLine("Here comes Dragon");
         }
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {

@@ -10,7 +10,7 @@ namespace MonsterCardGame.Cards
     {
         public WaterKraken(int strenght):base("Kraken", strenght, ElementType.water)
         {
-            Console.WriteLine("Release the Kraken!");
+            //Console.WriteLine("Release the Kraken!");
         }
 
     }

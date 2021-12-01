@@ -10,7 +10,7 @@ namespace MonsterCardGame.Cards
     {
         public NormalKnight(int strenght):base("Knight", strenght, ElementType.normal)
         {
-            Console.WriteLine("Knight entered the room");
+            //Console.WriteLine("Knight entered the room");
         }
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {

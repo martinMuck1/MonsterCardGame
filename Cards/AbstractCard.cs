@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonsterCardGame.Cards
+namespace MonsterCardGame.Cards 
 {
     public enum ElementType
     {
@@ -24,7 +24,7 @@ namespace MonsterCardGame.Cards
             this.Damage = damage;
             this.Element = element;
         }
-        public int AdaptDamage(AbstractCard opponent)   // compare card types involved in fight
+        public int AdaptDamage(AbstractCard opponent)   // calculate new damage, depending on opponent
         {
             int tmpDamage;
             if(this is AbstractMonster)
@@ -40,9 +40,10 @@ namespace MonsterCardGame.Cards
             }
             else
             {
-                tmpDamage = AdaptDamageSpellInvolved(opponent);
+                tmpDamage = AdaptDamageSpellInvolved(opponent);     //spell vs spell or monster
             }
-            tmpDamage = TestSpecialCases(tmpDamage, opponent);      //special cases like Kraken vs Spell etc.
+            //special cases like Kraken vs Spell etc.
+            tmpDamage = TestSpecialCases(tmpDamage, opponent);      
             return tmpDamage;
         }
 
@@ -50,7 +51,7 @@ namespace MonsterCardGame.Cards
         {
             return tmpDamage;
         }
-        //protected abstract int AdaptDamageMonsterVsMonster(AbstractCard opponent);
+
         protected int AdaptDamageSpellInvolved(AbstractCard opponent)  //logic for Element bonus
         {
             int tmpDamage = this.Damage;

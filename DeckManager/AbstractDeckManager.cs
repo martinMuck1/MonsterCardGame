@@ -12,20 +12,9 @@ namespace MonsterCardGame.DeckManage
         public List<AbstractCard> cardCollection = new List<AbstractCard>();    //change to protected 
         public AbstractDeckManager()
         {
-
-        }
-        public void AddCard(AbstractCard card)
-        {
-            this.cardCollection.Add(card);
-        }
-        protected int CreateRandomStrenght()
-        {
-            Random rnd = new Random();
-            int num = rnd.Next(10,100); //>= 10 and <= 99
-            return num;
         }
 
-        public AbstractCard CreateRandomCard()
+        public AbstractCard CreateRandomCard()      //returns a random CardType with random strength
         {
             AbstractCard card = null;
             int strength = CreateRandomStrenght();
@@ -75,6 +64,16 @@ namespace MonsterCardGame.DeckManage
 
             return card;
         }
+        protected int CreateRandomStrenght()        //maybe add frequences of strength
+        {
+            Random rnd = new Random();
+            int num = rnd.Next(10,100); //>= 10 and <= 99
+            return num;
+        }
+        public void AddCard(AbstractCard card)
+        {
+            this.cardCollection.Add(card);
+        }
 
         public void RemoveCard(int index)
         {
@@ -93,7 +92,7 @@ namespace MonsterCardGame.DeckManage
         {
             foreach (var item in this.cardCollection)
             {
-                Console.WriteLine("     {0}",item.Name);
+                Console.WriteLine("{0} : {1}",item.Name,item.Damage);
             }
         }
         /*

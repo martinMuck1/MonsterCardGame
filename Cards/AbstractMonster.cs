@@ -12,5 +12,6 @@ namespace MonsterCardGame.Cards
         {
         }
 
+        // maybe special spells have no effect monster? 
     }
 }

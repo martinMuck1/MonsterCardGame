@@ -1,0 +1,4 @@
+url method => url encode darf man verwenden 
+kein parser verwenden 
+klasse für http request, response , dictionary für paramater, hilfsfunktionen für encode decode 
+tokens => sesseions , kann auch hardcodiert werden , für author nur ob tokens gleich sind

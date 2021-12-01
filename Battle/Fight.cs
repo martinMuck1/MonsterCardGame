@@ -26,17 +26,26 @@ namespace MonsterCardGame.Battle
             this._playerB = playerB;
         }
 
-        public void startFight()
+        public void startFight()        //whole fight of two players with their decks
         {
-            //int winsA = 0, winsB = 0;
             Outcome tmpResult;
             Random rnd = new Random();
             int deckNrA, deckNrB;
             AbstractDeckManager deckA= _playerA.myDeck, deckB = _playerB.myDeck;
 
-            for (int rounds = 0; rounds < 100; rounds++)
+            //for demonstration purpose
+            Console.WriteLine("\nPlayer A: ");
+            deckA.showAllCards();
+            Console.WriteLine("\nPlayer B:");
+            deckB.showAllCards();
+            Console.WriteLine();
+
+
+            //get count of cards from each player
+            //play one round with random cards => loser loses card
+            //first player with no cards loses game
+            for (int rounds = 0; rounds < 100; rounds++)         
             {
-                //Console.WriteLine("Round: {0}", rounds + 1);
                 int countA = deckA.getSizeStack();
                 deckNrA = rnd.Next(countA);
                 AbstractCard cardA = deckA.showCard(deckNrA);
@@ -44,15 +53,13 @@ namespace MonsterCardGame.Battle
                 int countB = deckB.getSizeStack();
                 deckNrB = rnd.Next(countB);
                 AbstractCard cardB = deckB.showCard(deckNrB);
-                //deckA.showAllCards();
-                //Console.WriteLine("Other deck:");
-                //deckB.showAllCards();
+  
                 tmpResult = RoundFight(ref cardA, ref cardB);
                 if(tmpResult == Outcome.winnerB)
                 {
                     deckA.RemoveCard(deckNrA);
                     deckB.AddCard(cardA);
-                    if (countA == 1)
+                    if (countA == 1)        //last card count from opponent was 1 + he lost again = loser
                     {
                         Console.WriteLine($"{_playerB.Name} won the battle!");
                         break;
@@ -72,7 +79,8 @@ namespace MonsterCardGame.Battle
             }
         }
 
-        public Outcome RoundFight(ref AbstractCard cardA,ref AbstractCard cardB)
+        //round = compare adapted damage of cards
+        public Outcome RoundFight(ref AbstractCard cardA,ref AbstractCard cardB)    
         {
             Outcome tmpOutcome;
             int tmpDamageCardA = cardA.AdaptDamage(cardB);
@@ -81,12 +89,12 @@ namespace MonsterCardGame.Battle
             if (tmpDamageCardA > tmpDamageCardB)
             {
                 tmpOutcome = Outcome.winnerA;
-                Console.WriteLine($"Round Winner = Player A: {cardA.Name} ({tmpDamageCardA} damage) against Player B: {cardB.Name} ({tmpDamageCardB} damage)");
+                Console.WriteLine($"Round Winner = Player A: {cardA.Name} ({cardA.Damage} damage) against Player B: {cardB.Name} ({cardB.Damage} damage) => {tmpDamageCardA} vs {tmpDamageCardB}");
             }
             else if (tmpDamageCardA < tmpDamageCardB)
             {
                 tmpOutcome = Outcome.winnerB;
-                Console.WriteLine($"Round Winner = Player B: {cardB.Name} ({tmpDamageCardB} damage) against Player A: {cardA.Name} ({tmpDamageCardA} damage)");
+                Console.WriteLine($"Round Winner = Player B: {cardB.Name} ({cardB.Damage} damage) against Player A: {cardA.Name} ({cardA.Damage} damage)=> {tmpDamageCardB} vs {tmpDamageCardA}");
             }
             else
             {
