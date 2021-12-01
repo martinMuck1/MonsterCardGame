@@ -13,8 +13,7 @@ namespace MonsterCardGame
         static async Task Main(string[] args)
         {
             HTTPServer myTCPconn = new HTTPServer(8000);
-            await myTCPconn.startServerAsync();
-            System.Console.WriteLine("Finished Reading from Client");
+            await myTCPconn.StartServerAsync();
             
             /*
             User user1 = new User("Martin");

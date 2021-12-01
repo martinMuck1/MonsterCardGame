@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonsterCardGame.Server.Action.POST
+namespace MonsterCardGame.Server.Handling
 {
     class Users
     {

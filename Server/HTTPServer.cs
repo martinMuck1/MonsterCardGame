@@ -18,7 +18,7 @@ namespace MonsterCardGame.Server
             listener = new TcpListener(IPAddress.Loopback, portNum);
             
         }
-        public async Task startServerAsync() //TODO multithreaded multiple clients
+        public async Task StartServerAsync() //TODO multithreaded multiple clients
         {
             listener.Start(5);
             Console.CancelKeyPress += (sender, e) => Environment.Exit(0);
@@ -29,8 +29,17 @@ namespace MonsterCardGame.Server
                     var client = await listener.AcceptTcpClientAsync();
                     using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
                     using var reader = new StreamReader(client.GetStream());
+                    Console.WriteLine("Client connected");
                     Request req = new Request(reader);
-                    
+                    responseType respType = req.GetRequestContent();
+                    if(respType == responseType.OK)
+                    {
+                        //start response with content
+                    }
+                    else
+                    {
+                        //bad response 
+                    }
                 }
                 catch (Exception exc)
                 {
