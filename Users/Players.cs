@@ -7,13 +7,13 @@ using MonsterCardGame.DeckManage;
 
 namespace MonsterCardGame.Users
 {
-    class User
+    class Players
     {
         public string Name { get; private set; }
         //string NickName { get; set; }
         public AbstractDeckManager myDeck;  //change to private => add getter
         
-        public User(string name)    //create user with random deck
+        public Players(string name)    //create user with random deck
         {
             this.Name = name;
             this.myDeck = new Deck();

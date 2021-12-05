@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonsterCardGame.Server.Handling
+namespace MonsterCardGame.Server
 {
-    class Users
+    interface IHandler
     {
+        public abstract void Handle();
     }
 }

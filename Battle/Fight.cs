@@ -17,10 +17,10 @@ namespace MonsterCardGame.Battle
     }
     class Fight
     {
-        User _playerA;
-        User _playerB;
+        Players _playerA;
+        Players _playerB;
 
-        public Fight(ref User playerA, ref User playerB)
+        public Fight(ref Players playerA, ref Players playerB)
         {
             this._playerA = playerA;
             this._playerB = playerB;

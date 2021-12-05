@@ -29,16 +29,18 @@ namespace MonsterCardGame.Server
                     var client = await listener.AcceptTcpClientAsync();
                     using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
                     using var reader = new StreamReader(client.GetStream());
-                    Console.WriteLine("Client connected");
-                    Request req = new Request(reader);
-                    responseType respType = req.GetRequestContent();
+                    Console.WriteLine("Got Request from Client");
+                    responseType respType = responseType.ERR;
+                    Request req = new Request(reader, out respType);
+                    Response res = new Response(writer);
                     if(respType == responseType.OK)
                     {
-                        //start response with content
+                        Routing route = new Routing(req, res);
+                        route.FindRoute();
                     }
                     else
                     {
-                        //bad response 
+                        res.SendBadRequest(respType);
                     }
                 }
                 catch (Exception exc)
