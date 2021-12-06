@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MonsterCardGame.Server
+namespace MonsterCardGame.Database
 {
-    interface IHandler
+    public interface IUserDao
     {
-        public abstract responseType Handle();
+        public void createUser(UserModel user);
     }
 }

@@ -11,7 +11,7 @@ namespace MonsterCardGame.Server
     {
         private Request _req;
         private Response _res;
-        private Dictionary<string,object> _methodDict = new();
+        private Dictionary<string,Handler> _methodDict = new();
 
         public Routing(Request req, Response res)
         {
@@ -23,7 +23,7 @@ namespace MonsterCardGame.Server
         public void FindRoute()
         {
             string output;
-            string path = _req.Header["Path"];
+            string reqPath = _req.Header["Path"];
 
             if (_req.ReqMethod == requestType.POST)
             {
@@ -33,19 +33,12 @@ namespace MonsterCardGame.Server
                 //Console.WriteLine(JsonConvert.SerializeObject(tmpJSON));
             }
 
-            if (path.Contains("/") || path.Contains("?"))
+            if (reqPath.Contains("/") || reqPath.Contains("?"))
             {
                 //further checking of path=> users/martin
             }
-
-            Handler handleObj = (Handler)_methodDict[path];
-            handleObj.Handle();
-            _res.SendResponse(responseType.OK, "");
-        }
-
-        private T GetJSON<T>(string output){
-
-            return JsonConvert.DeserializeObject<T>(output);
+            Handler handleObj = _methodDict["users"];
+            _res.SendResponse( handleObj.Handle(),"");
         }
 
         private void initDic(string message){

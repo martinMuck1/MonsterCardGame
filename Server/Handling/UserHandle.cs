@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using MonsterCardGame.Database;
 
 namespace MonsterCardGame.Server
 {
-    class UserHandle :Handler
+    public class UserHandle :Handler
     {
         struct formatUser
         {
@@ -15,17 +16,19 @@ namespace MonsterCardGame.Server
             public string password;
         }
 
-        formatUser _reqUser;
+        private formatUser _reqUser;
 
         public UserHandle(string message):base()
         {
             _reqUser = JsonConvert.DeserializeObject<formatUser>(message);
         }
 
-        public override void Handle()
+        public override responseType Handle()
         {
-            Console.WriteLine(_reqUser.userName);
-            Console.WriteLine(_reqUser.password);
+            IUserDao userdao = new UserDao();
+            userdao.createUser(new UserModel(_reqUser.userName, _reqUser.password));
+
+            return responseType.OK;
         }
     }
 }

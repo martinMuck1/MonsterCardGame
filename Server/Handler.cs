@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Server
 {
-    abstract class  Handler : IHandler
+    public abstract class  Handler : IHandler
     {
 
         public Handler()
@@ -15,6 +15,6 @@ namespace MonsterCardGame.Server
           
         }
 
-        public abstract void Handle();
+        public abstract responseType Handle();
     }
 }
