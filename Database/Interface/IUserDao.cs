@@ -8,6 +8,6 @@ namespace MonsterCardGame.Database
 {
     public interface IUserDao
     {
-        public void createUser(UserModel user);
+        public int createUser(UserModel user);
     }
 }

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Server
 {         
-    enum requestType { 
+    public enum requestType { 
             GET,POST,PUT,DELETE
     }
-    class Request
+    public class Request       // handling request => functions for reading header and body
     {
         public StreamReader ReqReader { get; private set; }
         public Dictionary<string, string> Header { get; private set; } = new(); 
@@ -47,6 +47,15 @@ namespace MonsterCardGame.Server
                     Header.Add("Path", parts[1]);
                     Header.Add("Version", parts[2]);
                     lineCount++;
+                }
+                if (line.ToLower().StartsWith("authorization:"))
+                {
+                    string tmp = line.Substring(15).Trim();
+                    string[] val = tmp.Split(" "); 
+                    if(val.Length != 2 || val[0] != "Basic")
+                        return responseType.UNAUTHORIZED;
+
+                    Header.Add("Authorization", val[1].Trim());
                 }
                 if (line.ToLower().StartsWith("content-length:"))
                 {

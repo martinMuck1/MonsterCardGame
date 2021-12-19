@@ -14,15 +14,24 @@ namespace MonsterCardGame.Database
         {
             _db = Database.getInstance();
         }
-        public void createUser(UserModel user)
+        public int createUser(UserModel user)
         {
-            string sql = "INSERT INTO test(myid,myval) VALUES (1,@myval);";
-            using var query = new NpgsqlCommand(sql, _db.Conn);
-            query.Parameters.AddWithValue("myval", "hey");
-            //query.Parameters.AddWithValue("Password", user.Password);
-            query.Prepare();
-            query.ExecuteNonQuery();
-            Console.WriteLine("Created new user in DB");
+            try
+            {
+                string sql = "INSERT INTO users(username,password) VALUES (@username,@password);";
+                using var query = new NpgsqlCommand(sql, _db.Conn);
+                query.Parameters.AddWithValue("username", user.Username);
+                query.Parameters.AddWithValue("password", user.Password);
+                query.Prepare();
+                query.ExecuteNonQuery();
+                Console.WriteLine("Created new user in DB");
+                return 0;
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                Console.WriteLine("DB Error: User already exists");
+                return -1;
+            }
         }
     }
 }

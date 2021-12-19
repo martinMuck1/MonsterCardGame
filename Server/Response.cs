@@ -12,7 +12,7 @@ namespace MonsterCardGame.Server
     {
         OK = 200, NO_CONTENT = 204, ERR = 400, UNAUTHORIZED = 401, NOT_FOUND = 404
     }
-    class Response
+    public class Response
     {
         public StreamWriter Writer { get; private set;}
         public responseType RespType { get; private set; }
@@ -34,7 +34,8 @@ namespace MonsterCardGame.Server
 
         public void SendResponse(responseType rep, string message)
         {
-            this.Message = (string)JsonConvert.SerializeObject(message);
+            //this.Message = (string)JsonConvert.SerializeObject(message);
+            this.Message = message;
             this.RespType = rep;
             this._contentLength = System.Text.ASCIIEncoding.UTF8.GetByteCount(message);
             Send();
@@ -48,7 +49,7 @@ namespace MonsterCardGame.Server
             this.Writer.WriteLine("Content-Type: application/json");
             this.Writer.WriteLine("Connection: Closed");
             this.Writer.WriteLine("");
-            
+            this.Writer.WriteLine(this.Message);
             if (this.Message == "")
             {
                 Writer.Close();

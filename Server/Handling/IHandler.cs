@@ -4,17 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MonsterCardGame.Server
 {
-    public abstract class  Handler : IHandler
+    interface IHandler
     {
-
-        public Handler()
-        {
-          
-        }
-
-        public abstract responseType Handle();
+        public bool CheckAuth(Response res, string token);
+        public abstract void Handle(Response res, string token);
+        
     }
 }

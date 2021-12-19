@@ -7,7 +7,11 @@ using Newtonsoft.Json;
 
 namespace MonsterCardGame.Server
 {
-    class Routing
+    public enum authLevel
+    {
+        noLogin = 1, Login = 2, Admin =3,
+    }
+    public class Routing
     {
         private Request _req;
         private Response _res;
@@ -24,6 +28,9 @@ namespace MonsterCardGame.Server
         {
             string output;
             string reqPath = _req.Header["Path"];
+            string token = "";
+            if (_req.Header.ContainsKey("Authorization"))
+                token = _req.Header["Authorization"];
 
             if (_req.ReqMethod == requestType.POST)
             {
@@ -37,13 +44,13 @@ namespace MonsterCardGame.Server
             {
                 //further checking of path=> users/martin
             }
-            Handler handleObj = _methodDict["users"];
-            _res.SendResponse( handleObj.Handle(),"");
+            Handler handleObj = _methodDict[reqPath];
+            handleObj.Handle(_res, token);
         }
 
         private void initDic(string message){
-            this._methodDict.Add("users", new UserHandle(message));
-            this._methodDict.Add("sessions", new UserHandle(message));
+            this._methodDict.Add("users", new UserHandle(message,authLevel.noLogin));
+            //this._methodDict.Add("sessions", new UserHandle(message));
         }
 
 

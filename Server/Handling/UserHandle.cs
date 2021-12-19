@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using MonsterCardGame.Database;
+using Newtonsoft.Json.Linq;
 
 namespace MonsterCardGame.Server
 {
@@ -18,17 +19,23 @@ namespace MonsterCardGame.Server
 
         private formatUser _reqUser;
 
-        public UserHandle(string message):base()
+        public UserHandle(string message, authLevel level) :base(level)
         {
             _reqUser = JsonConvert.DeserializeObject<formatUser>(message);
         }
 
-        public override responseType Handle()
+        public override void Handle(Response res,string token)
         {
-            IUserDao userdao = new UserDao();
-            userdao.createUser(new UserModel(_reqUser.userName, _reqUser.password));
+            if (!CheckAuth(res, token))
+                return;
 
-            return responseType.OK;
+            IUserDao userdao = new UserDao();
+            //if (userdao.createUser(new UserModel(_reqUser.userName, _reqUser.password)) != 0)
+            //    res.SendBadRequest(responseType.ERR);
+            JObject obj = new JObject();
+            obj["message"] = "created user successfully";
+            obj["token"] = "sometoken";
+            res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
         }
     }
 }
