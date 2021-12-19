@@ -9,23 +9,23 @@ namespace MonsterCardGame.Server
 {
     public abstract class  Handler : IHandler
     {
-        protected authLevel _authLevel;
+        protected AuthLevel _authLevel;
 
-        public Handler(authLevel lev)
+        public Handler(AuthLevel lev)
         {
             this._authLevel = lev;
         }
 
         public bool CheckAuth(Response res, string token)
         {
-            if (_authLevel == authLevel.noLogin)
+            if (_authLevel == AuthLevel.noLogin)
                 return true;
-            if(_authLevel == authLevel.Login)
+            if(_authLevel == AuthLevel.Login)
             {
                 //TODO check if token exists
                 //if not => send 401
             }
-            if(_authLevel == authLevel.Admin)
+            if(_authLevel == AuthLevel.Admin)
             {
                 //TODO check if this is admin token  
             }

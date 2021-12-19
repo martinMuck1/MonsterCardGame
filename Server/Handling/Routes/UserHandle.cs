@@ -19,7 +19,7 @@ namespace MonsterCardGame.Server
 
         private formatUser _reqUser;
 
-        public UserHandle(string message, authLevel level) :base(level)
+        public UserHandle(string message, AuthLevel level) :base(level)
         {
             _reqUser = JsonConvert.DeserializeObject<formatUser>(message);
         }
@@ -30,11 +30,15 @@ namespace MonsterCardGame.Server
                 return;
 
             IUserDao userdao = new UserDao();
-            //if (userdao.createUser(new UserModel(_reqUser.userName, _reqUser.password)) != 0)
-            //    res.SendBadRequest(responseType.ERR);
+            if (userdao.CreateUser(new UserModel(_reqUser.userName, _reqUser.password)) != 0)
+            {
+                res.SendResponse(responseType.ERR, "{message: User already exists!}");
+                return;
+            }
+
             JObject obj = new JObject();
             obj["message"] = "created user successfully";
-            obj["token"] = "sometoken";
+            obj["token"] = _reqUser.userName+ "-mtcgToken";
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
         }
     }

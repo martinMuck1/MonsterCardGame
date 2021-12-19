@@ -49,13 +49,13 @@ namespace MonsterCardGame.Server
             this.Writer.WriteLine("Content-Type: application/json");
             this.Writer.WriteLine("Connection: Closed");
             this.Writer.WriteLine("");
-            this.Writer.WriteLine(this.Message);
+            
             if (this.Message == "")
             {
                 Writer.Close();
                 return;
             }
-
+            this.Writer.WriteLine(this.Message);
             Writer.Close();
 
         }

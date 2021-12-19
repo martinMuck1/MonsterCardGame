@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MonsterCardGame.Server
 {
-    public enum authLevel
+    public enum AuthLevel
     {
         noLogin = 1, Login = 2, Admin =3,
     }
@@ -36,7 +36,7 @@ namespace MonsterCardGame.Server
             {
                 int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
                 output = _req.ReadHttpBody(contentLength);
-                initDic(output);
+                InitDic(output);
                 //Console.WriteLine(JsonConvert.SerializeObject(tmpJSON));
             }
 
@@ -48,9 +48,10 @@ namespace MonsterCardGame.Server
             handleObj.Handle(_res, token);
         }
 
-        private void initDic(string message){
-            this._methodDict.Add("users", new UserHandle(message,authLevel.noLogin));
-            //this._methodDict.Add("sessions", new UserHandle(message));
+        //mapping routes to handlers
+        private void InitDic(string message){
+            this._methodDict.Add("users", new UserHandle(message, AuthLevel.noLogin));
+            this._methodDict.Add("sessions", new LoginHandle(message, AuthLevel.noLogin));
         }
 
 
