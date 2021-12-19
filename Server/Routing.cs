@@ -21,12 +21,12 @@ namespace MonsterCardGame.Server
         {
             this._req = req;
             this._res = res;
-            //initDic();
+            InitDic();
         }
 
         public void FindRoute()
         {
-            string output;
+            string output = "";
             string reqPath = _req.Header["Path"];
             string token = "";
             if (_req.Header.ContainsKey("Authorization"))
@@ -36,7 +36,7 @@ namespace MonsterCardGame.Server
             {
                 int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
                 output = _req.ReadHttpBody(contentLength);
-                InitDic(output);
+                //InitDic(output);
                 //Console.WriteLine(JsonConvert.SerializeObject(tmpJSON));
             }
 
@@ -45,13 +45,15 @@ namespace MonsterCardGame.Server
                 //further checking of path=> users/martin
             }
             Handler handleObj = _methodDict[reqPath];
+            handleObj.DeserializeMessage(output);
             handleObj.Handle(_res, token);
         }
 
         //mapping routes to handlers
-        private void InitDic(string message){
-            this._methodDict.Add("users", new UserHandle(message, AuthLevel.noLogin));
-            this._methodDict.Add("sessions", new LoginHandle(message, AuthLevel.noLogin));
+        private void InitDic(){
+            this._methodDict.Add("users", new UserHandle(AuthLevel.noLogin));
+            this._methodDict.Add("sessions", new LoginHandle( AuthLevel.noLogin));
+            this._methodDict.Add("packages", new CreatePackage( AuthLevel.Admin));
         }
 
 

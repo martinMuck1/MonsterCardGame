@@ -27,11 +27,17 @@ namespace MonsterCardGame.Server
             }
             if(_authLevel == AuthLevel.Admin)
             {
+                if(token == "admin-mtcgToken")
+                {
+                    Console.WriteLine("Token accepted");
+                    return true;
+                }
                 //TODO check if this is admin token  
             }
             return false;
         }
 
         public abstract void Handle(Response res, string token);
+        public abstract void DeserializeMessage(string message);
     }
 }

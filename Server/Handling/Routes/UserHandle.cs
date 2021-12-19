@@ -19,7 +19,11 @@ namespace MonsterCardGame.Server
 
         private formatUser _reqUser;
 
-        public UserHandle(string message, AuthLevel level) :base(level)
+        public UserHandle( AuthLevel level) :base(level)
+        {
+        }
+
+        public override void DeserializeMessage(string message)
         {
             _reqUser = JsonConvert.DeserializeObject<formatUser>(message);
         }
