@@ -36,14 +36,14 @@ namespace MonsterCardGame.Server
             {
                 int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
                 output = _req.ReadHttpBody(contentLength);
-                //InitDic(output);
-                //Console.WriteLine(JsonConvert.SerializeObject(tmpJSON));
             }
 
+            /*
             if (reqPath.Contains("/") || reqPath.Contains("?"))
             {
                 //further checking of path=> users/martin
             }
+            */
             Handler handleObj = _methodDict[reqPath];
             handleObj.DeserializeMessage(output);
             handleObj.Handle(_res, token);
@@ -52,8 +52,9 @@ namespace MonsterCardGame.Server
         //mapping routes to handlers
         private void InitDic(){
             this._methodDict.Add("users", new UserHandle(AuthLevel.noLogin));
-            this._methodDict.Add("sessions", new LoginHandle( AuthLevel.noLogin));
-            this._methodDict.Add("packages", new CreatePackage( AuthLevel.Admin));
+            this._methodDict.Add("sessions", new LoginHandle(AuthLevel.noLogin));
+            this._methodDict.Add("packages", new CreatePackage(AuthLevel.Admin));
+            this._methodDict.Add("transactions/packages", new AquirePackage(AuthLevel.Login));
         }
 
 

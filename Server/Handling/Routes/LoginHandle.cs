@@ -45,9 +45,12 @@ namespace MonsterCardGame.Server
                 return;
             }
 
+            string tmpToken = _reqUser.userName + "-mtcgToken";     //should be gained through db repsonse normally 
             JObject obj = new JObject();
             obj["message"] = "login was successfull";
-            obj["token"] = _reqUser.userName+ "-mtcgToken";     //TODO token from DB taken
+            obj["token"] = tmpToken;
+            HTTPServer.SessionDic.Add(HTTPServer.SessionID, tmpToken);
+            HTTPServer.Username = _reqUser.userName;
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
         }
     }

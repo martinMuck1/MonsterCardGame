@@ -9,5 +9,7 @@ namespace MonsterCardGame.Database
     public interface IPackageDao
     {
         public int CreatePackage(PackageModel package);
+        public List<PackageModel> GetAllUnaquiredPackages();
+        public int AquirePackage(PackageModel aquiredPackage);
     }
 }

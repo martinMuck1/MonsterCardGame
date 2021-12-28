@@ -10,5 +10,8 @@ namespace MonsterCardGame.Database
     {
         public int CreateUser(UserModel user);
         public int LoginUser(UserModel user);
+        public int PayWithCoins(string username, int amount);
+        public int CheckAccountBalance(string username);
+        public int GetUserID(string username);
     }
 }

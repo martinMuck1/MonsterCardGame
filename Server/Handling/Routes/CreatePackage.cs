@@ -37,23 +37,34 @@ namespace MonsterCardGame.Server
 
         public override void Handle(Response res,string token)
         {
+            int errCode;
             if (!CheckAuth(res, token))
                 return;
 
             IPackageDao packdao = new PackageDao();
+            ICardDao carddao = new CardDao();
+
             PackageModel package = new PackageModel(Guid.NewGuid().ToString());
-            _package.ForEach((card) => package.AddCard(card.id, card.name, card.damage));
-
-            _package.ForEach((card) => Console.WriteLine(card.id + " "+card.name+" "+card.damage));
-
-            if (packdao.CreatePackage(package) != 0)
+            if ((errCode = packdao.CreatePackage(package)) != 0)        //create package id
             {
-                res.SendResponse(responseType.ERR, "{message: Package ID probably already exists}");
+                if(errCode == -1)
+                    res.SendResponse(responseType.ERR, "{message: Package ID probably already exists}");
                 return;
+            }
+
+            foreach (var card in _package)      //create cards for package
+            {
+                CardModel tmpCardObj = new CardModel(card.id, card.name, card.damage);
+                if (carddao.CreateCard(tmpCardObj, package.PackageID) != 0)
+                {
+                    res.SendResponse(responseType.ERR, "{message: at least one Card ID already exists}");
+                    return;
+                }
             }
 
             JObject obj = new JObject();
             obj["message"] = "created Package successfully";
+            obj["packageID"] = package.PackageID;
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
         }
     }

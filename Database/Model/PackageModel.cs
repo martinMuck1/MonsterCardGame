@@ -9,17 +9,22 @@ namespace MonsterCardGame.Database
     public class PackageModel
     {
         public string PackageID { get; private set; }
-        public List<CardModel> PackageCards { get; private set; }
+        public string Username { get; private set; }
+        public int UID { get; private set; }
 
         public PackageModel(string packageID)
         {
             this.PackageID = packageID;
-            this.PackageCards = new List<CardModel>();
+        }
+        public PackageModel(string packageID, string username)
+        {
+            this.PackageID = packageID;
+            this.Username = username;
         }
 
-        public void AddCard(string id, string name, float damage)
+        public void SetUID()
         {
-            this.PackageCards.Add(new CardModel(id, name, damage));
+            this.UID = DBHelper.ConvertNameToID(this.Username);
         }
     }
 }

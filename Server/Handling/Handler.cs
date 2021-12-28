@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MonsterCardGame.Database;
 
 
 namespace MonsterCardGame.Server
@@ -22,18 +23,35 @@ namespace MonsterCardGame.Server
                 return true;
             if(_authLevel == AuthLevel.Login)
             {
-                //TODO check if token exists
-                //if not => send 401
-            }
-            if(_authLevel == AuthLevel.Admin)
-            {
-                if(token == "admin-mtcgToken")
+                if (!HTTPServer.SessionDic.ContainsKey(HTTPServer.SessionID))
+                {
+                    Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
+                    res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
+                    return false;
+                }
+                if(token == HTTPServer.SessionDic[HTTPServer.SessionID])        //request token == in memory token 
                 {
                     Console.WriteLine("Token accepted");
                     return true;
                 }
-                //TODO check if this is admin token  
             }
+            if(_authLevel == AuthLevel.Admin)
+            {
+                
+                if (!HTTPServer.SessionDic.ContainsKey(HTTPServer.SessionID))
+                {
+                    Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
+                    res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
+                    return false;
+                }
+                
+                if (token == "admin-mtcgToken")     //normally this should be in db
+                {
+                    Console.WriteLine("Admin Token accepted");
+                    return true;
+                }
+            }
+            res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
             return false;
         }
 

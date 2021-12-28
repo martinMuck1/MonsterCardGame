@@ -9,9 +9,13 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Server
 {
+    
     class HTTPServer
     {
         private TcpListener listener;
+        public static Dictionary<string, string> SessionDic = new Dictionary<string, string>();
+        public static string SessionID { get; private set; }
+        public static string Username { get; set; } = "";
 
         public HTTPServer(int portNum)  //start server at 127.0.0.1 at Port 8000
         {
@@ -22,6 +26,7 @@ namespace MonsterCardGame.Server
         {
             listener.Start(5);
             Console.CancelKeyPress += (sender, e) => Environment.Exit(0);
+            HTTPServer.SessionID = Guid.NewGuid().ToString();
             while (true)
             {
                 try

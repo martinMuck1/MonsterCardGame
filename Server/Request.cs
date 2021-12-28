@@ -60,7 +60,7 @@ namespace MonsterCardGame.Server
                 if (line.ToLower().StartsWith("content-length:"))
                 {
                     contentLength = int.Parse(line.Substring(15).Trim());
-                    if (contentLength > 1024 || contentLength <= 0)
+                    if (contentLength > 1024 || contentLength < 0)
                         return responseType.ERR;
 
                     Header.Add("ContentLength", contentLength.ToString());

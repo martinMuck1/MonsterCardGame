@@ -11,6 +11,7 @@ namespace MonsterCardGame.Database
         public string Username { get; private set; }
         public string Password { get; private set; }
         public string Token { get; private set; }
+        public int UID { get; set; }
 
         public UserModel(string username, string password)
         {
@@ -18,5 +19,11 @@ namespace MonsterCardGame.Database
             this.Password = password;
             this.Token = username + "-mtcgToken";
         }
+
+        public UserModel(string username)
+        {
+            this.Username = username;
+        }
+
     }
 }
