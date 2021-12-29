@@ -26,33 +26,40 @@ namespace MonsterCardGame.Server
         {
             if (!CheckAuth(res, token))
                 return;
-            int returnVal;
-            var random = new Random();
-            IUserDao userDao = new UserDao();
-            UserModel user = new UserModel(HTTPServer.Username);
-
-            //check balance of account and spend coins
-            Console.WriteLine("Cheking Balance");
-            if((returnVal = userDao.PayWithCoins(user.Username, 5)) != 0) 
+            int packageCost = 5;
+            var random = HTTPServer.random;
+            string username;
+            if(!Session.SessionDic.TryGetValue(token,out username))
             {
-                string message = "{message: some error occured while trying to pay coins}";
+                //key is not in dic => should not happen cause of checkauth
+                Console.WriteLine("Key not in Dictionary");
+                return;
+            }
+            IUserDao userDao = new UserDao();
+            UserModel user = new UserModel(username);
 
-                if( returnVal == -1)
-                    message = "{message: updating coins failed}";
-                if(returnVal == -2)
-                    message = "{message: requesting coins from db failed}";
-                if(returnVal == -3)
-                    message = "{message: user does not have enough balance to aquire package!}";
-                res.SendResponse(responseType.ERR, message);
+            //check balance of account 
+            Console.WriteLine("Cheking Balance...");
+            int tmpBalance = userDao.CheckAccountBalance(user.Username);
+            if (tmpBalance < packageCost)
+            {
+                Console.WriteLine("Error: not enough coins for transaction");
+                res.SendResponse(responseType.ERR, "{message: user does not have enough balance to aquire package!}");
                 return;
             }
 
             //aquire random package
-            Console.WriteLine("aquiring Package");
+            Console.WriteLine("Aquiring Package...");
             IPackageDao packageDao = new PackageDao();
             List<PackageModel> packageIDList = packageDao.GetAllUnaquiredPackages();
+            if(packageIDList.Count == 0)
+            {
+                Console.WriteLine("Error: No available package");
+                res.SendResponse(responseType.ERR, "{message: no packages available, please contact admin}");
+                return;
+            }
             int index = random.Next(packageIDList.Count);
-            PackageModel aquiredPacakge = new PackageModel(packageIDList[index].PackageID, HTTPServer.Username);
+            PackageModel aquiredPacakge = new PackageModel(packageIDList[index].PackageID, username);
             aquiredPacakge.SetUID();
             if (packageDao.AquirePackage(aquiredPacakge) != 0)
             {
@@ -60,7 +67,13 @@ namespace MonsterCardGame.Server
                 return;
             }
 
-            Console.WriteLine("sending response");
+            if(userDao.PayWithCoins(user.Username, 5) != 0) 
+            {
+                string message = "{message: some error occured while trying to pay coins}";
+                res.SendResponse(responseType.ERR, message);
+                return;
+            }
+            Console.WriteLine($"{aquiredPacakge.Username} aquired package { aquiredPacakge.PackageID}");
             JObject obj = new JObject();
             obj["message"] = "Aquired package successfully";
             obj["packageID"] = aquiredPacakge.PackageID;

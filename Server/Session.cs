@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Server
 {
-    class Session
+    public struct sessionData
     {
-        private static Session instance = new Session();
+        string username;
+        string token;
+    }
+    public class Session
+    {
+        //registers only logged in users in dictionary
+        public static Dictionary<string, string> SessionDic { get; } = new Dictionary<string, string>();
 
-        private Session()
-        {
-
-        }
-
-        //Get the only object available
-        public static Session getInstance()
-        {
-            return instance;
+        public static void AddEntry(string token, string username) {
+            //string tmpGuid =  Guid.NewGuid().ToString();
+            SessionDic.Add(token, username);
         }
     }
 }

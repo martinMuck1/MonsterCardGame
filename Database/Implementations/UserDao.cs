@@ -29,7 +29,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
                 Console.WriteLine("DB Error: User already exists");
                 return -1;
             }
@@ -51,37 +51,23 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
-                Console.WriteLine("DB Error: Query got rejected from DB");
+                //Console.WriteLine(e);
+                Console.WriteLine("DB Error: Username or Password wrong");
                 return -1;
             }
         }
 
         public int CheckAccountBalance(string username)
         {
-            try
-            {
-                string sql = "SELECT coins FROM users WHERE username = @username ;";
-                using var query = new NpgsqlCommand(sql, _db.Conn);
-                query.Parameters.AddWithValue("username", username);
-                query.Prepare();
-                return (Int32)query.ExecuteScalar();
-            }
-            catch (Npgsql.PostgresException e)
-            {
-                Console.WriteLine(e);
-                Console.WriteLine("DB Error: Query got rejected from DB");
-                return -1;
-            }
+            string sql = "SELECT coins FROM users WHERE username = @username ;";
+            using var query = new NpgsqlCommand(sql, _db.Conn);
+            query.Parameters.AddWithValue("username", username);
+            query.Prepare();
+            return (Int32)query.ExecuteScalar();
         }
 
         public int PayWithCoins(string username, int amount)
         {
-            int tmpBalance;
-            if ((tmpBalance = CheckAccountBalance(username)) == -1)
-                return -2;
-            if (tmpBalance < amount)
-                return -3;
             try
             {
                 string sql = "UPDATE users SET coins = coins - @amount WHERE username = @username;";

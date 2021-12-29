@@ -23,22 +23,19 @@ namespace MonsterCardGame.Server
                 return true;
             if(_authLevel == AuthLevel.Login)
             {
-                if (!HTTPServer.SessionDic.ContainsKey(HTTPServer.SessionID))
+                if (!Session.SessionDic.ContainsKey(token))
                 {
                     Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
                     res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
                     return false;
                 }
-                if(token == HTTPServer.SessionDic[HTTPServer.SessionID])        //request token == in memory token 
-                {
-                    Console.WriteLine("Token accepted");
-                    return true;
-                }
+                //request token is in memory => permission accepted
+                Console.WriteLine("Token accepted");
+                return true;
             }
             if(_authLevel == AuthLevel.Admin)
             {
-                
-                if (!HTTPServer.SessionDic.ContainsKey(HTTPServer.SessionID))
+                if (!Session.SessionDic.ContainsKey(token))
                 {
                     Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
                     res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
