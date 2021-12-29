@@ -10,7 +10,7 @@ namespace MonsterCardGame.Database
     {
         public int CreateCard(CardModel card, string packageID);
         public int ChangeCardsOwner(CardModel card);
-        public List<CardModel> ShowAquiredCards(string username);
+        public List<CardModel> ShowAquiredCards(int username);
         public List<CardModel> showPackageCards(PackageModel package);
     }
 }

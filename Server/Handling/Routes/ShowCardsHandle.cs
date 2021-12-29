@@ -33,11 +33,21 @@ namespace MonsterCardGame.Server
                 Console.WriteLine("Key not in Dictionary");
                 return;
             }
-
+          
             CardDao cardao = new CardDao();
+            JArray array = new JArray();
             UserModel modelUser = new UserModel(username);
-            List<CardModel> cardList = cardao.ShowAquiredCards(modelUser.Username);
-
+            List<CardModel> cardList = cardao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username));
+            foreach (var card in cardList)
+            {
+                JObject obj = new JObject();
+                obj["ID"] = card.CardID;
+                obj["Name"] = card.Name;
+                obj["Damage"] = card.Damage;
+                array.Add(obj);
+            }
+            Console.WriteLine("Sent Aquired Packages to user");
+            res.SendResponse(responseType.OK, JsonConvert.SerializeObject(array));
         }
     }
 }

@@ -61,7 +61,7 @@ namespace MonsterCardGame.Server
                     return;
                 }
             }
-
+            Console.WriteLine("Created Packages successfully");
             JObject obj = new JObject();
             obj["message"] = "created Package successfully";
             obj["packageID"] = package.PackageID;

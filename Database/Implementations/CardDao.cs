@@ -73,7 +73,7 @@ namespace MonsterCardGame.Database
             return tmpList;
         }
 
-        public List<CardModel> ShowAquiredCards(string username)
+        public List<CardModel> ShowAquiredCards(int username)
         {
             List<CardModel> tmpList = new List<CardModel>();
             string sql = "SELECT \"cardID\",name,damage FROM cards WHERE \"owner\" = @username;";

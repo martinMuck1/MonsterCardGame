@@ -44,7 +44,7 @@ namespace MonsterCardGame.Server
                     res.SendResponse(responseType.UNAUTHORIZED, "{message: User does not exist or pw wrong}");
                 return;
             }
-
+            Console.WriteLine("Login was successfull");
             string tmpToken = _reqUser.userName + "-mtcgToken";     //should be gained through db repsonse normally 
             JObject obj = new JObject();
             obj["message"] = "login was successfull";

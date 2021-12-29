@@ -39,7 +39,7 @@ namespace MonsterCardGame.Server
                 res.SendResponse(responseType.ERR, "{message: User already exists!}");
                 return;
             }
-
+            Console.WriteLine("Created User successfully");
             JObject obj = new JObject();
             obj["message"] = "created user successfully";
             obj["token"] = _reqUser.userName+ "-mtcgToken";

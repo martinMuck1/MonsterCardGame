@@ -64,7 +64,7 @@ namespace MonsterCardGame.Server
 
         private void InitGetDic()
         {
-            this._methodDict.Add("cards", new ShowCardsHandle(AuthLevel.noLogin));
+            this._methodDict.Add("cards", new ShowCardsHandle(AuthLevel.Login));
         }
 
 
