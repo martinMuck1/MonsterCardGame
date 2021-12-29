@@ -61,6 +61,16 @@ namespace MonsterCardGame.Server
                 handleObj.Param = param;
                 handleObj.Handle(_res, token);
             }
+            if (_req.ReqMethod == requestType.PUT)
+            {
+                InitPutDic();
+                int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
+                output = _req.ReadHttpBody(contentLength);
+                Handler handleObj = _methodDict[reqPath];
+                handleObj.DeserializeMessage(output);
+                handleObj.Param = param;
+                handleObj.Handle(_res, token);
+            }
         }
 
         //mapping routes to handlers
@@ -77,6 +87,10 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("deck", new ShowDeck(AuthLevel.Login));
         }
 
+        private void InitPutDic()
+        {
+            this._methodDict.Add("deck", new DefineDeck(AuthLevel.Login));
+        }
 
     }
 }

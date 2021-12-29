@@ -10,7 +10,7 @@ namespace MonsterCardGame.Database
     {
         public string Username { get; private set; }
         public int UID { get; private set; }
-        public string[] Card { get; private set; }
+        public string[] Card { get; private set; } = Enumerable.Range(0, 4).Select(i => string.Empty).ToArray();
 
         public DeckModel(int uid,string card1, string card2,string card3, string card4)
         {

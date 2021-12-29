@@ -33,6 +33,29 @@ namespace MonsterCardGame.Database
             return 0;
         }
 
+        public int AddCardsToDeck(DeckModel deck)
+        {
+            try
+            {
+                string sql = "UPDATE deck SET card1 = @card1,card2 = @card2,card3 = @card3,card4 = @card4 WHERE \"fk_uid\" = @uid;";
+                using var query = new NpgsqlCommand(sql, _db.Conn);
+                query.Parameters.AddWithValue("card1", deck.Card[0]);
+                query.Parameters.AddWithValue("card2", deck.Card[1]);
+                query.Parameters.AddWithValue("card3", deck.Card[2]);
+                query.Parameters.AddWithValue("card4", deck.Card[3]);
+                query.Parameters.AddWithValue("uid", deck.UID);
+                query.Prepare();
+                query.ExecuteNonQuery();
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine("DB Error: Could not set cards in deck");
+                return -1;
+            }
+            return 0;
+        }
+
         public DeckModel ShowDeckCards(int uid)
         {
             DeckModel tmpModel = null;
