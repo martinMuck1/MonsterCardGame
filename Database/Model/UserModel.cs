@@ -24,6 +24,11 @@ namespace MonsterCardGame.Database
         {
             this.Username = username;
         }
+        public void SetUID()
+        {
+            this.UID = DBHelper.ConvertNameToID(this.Username);
+        }
+
 
     }
 }

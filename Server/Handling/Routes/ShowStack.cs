@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 
 namespace MonsterCardGame.Server
 {
-    public class ShowCardsHandle :Handler
+    public class ShowStack :Handler
     {
-        public ShowCardsHandle( AuthLevel level) :base(level)
+        public ShowStack( AuthLevel level) :base(level)
         {
             
         }
@@ -34,19 +34,11 @@ namespace MonsterCardGame.Server
                 return;
             }
           
-            CardDao cardao = new CardDao();
-            JArray array = new JArray();
+            ICardDao cardao = new CardDao();
             UserModel modelUser = new UserModel(username);
             List<CardModel> cardList = cardao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username));
-            foreach (var card in cardList)
-            {
-                JObject obj = new JObject();
-                obj["ID"] = card.CardID;
-                obj["Name"] = card.Name;
-                obj["Damage"] = card.Damage;
-                array.Add(obj);
-            }
-            Console.WriteLine("Sent Aquired Packages to user");
+            JArray array = ListToJSON(cardao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username)));
+            Console.WriteLine("Sent Aquired Packages = Stack to user");
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(array));
         }
     }

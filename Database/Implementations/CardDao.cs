@@ -88,5 +88,21 @@ namespace MonsterCardGame.Database
             dr.Close();
             return tmpList;
         }
+
+        public CardModel ShowSingleCard(string cardID)
+        {
+            CardModel tmpCard = null;
+            string sql = "SELECT \"cardID\",name,damage FROM cards WHERE \"cardID\" = @cardID;";
+            using var query = new NpgsqlCommand(sql, _db.Conn);
+            query.Parameters.AddWithValue("cardID", cardID);
+            query.Prepare();
+            NpgsqlDataReader dr = query.ExecuteReader();
+            while (dr.Read())
+            {
+                tmpCard = new CardModel((string)dr[0], (string)dr[1], (double)dr[2]);
+            }
+            dr.Close();
+            return tmpCard;
+        }
     }
 }

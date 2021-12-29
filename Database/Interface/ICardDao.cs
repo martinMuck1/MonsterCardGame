@@ -12,5 +12,6 @@ namespace MonsterCardGame.Database
         public int ChangeCardsOwner(CardModel card);
         public List<CardModel> ShowAquiredCards(int username);
         public List<CardModel> showPackageCards(PackageModel package);
+        public CardModel ShowSingleCard(string cardID);
     }
 }

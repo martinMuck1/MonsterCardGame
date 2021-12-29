@@ -25,11 +25,18 @@ namespace MonsterCardGame.Server
 
         public void FindRoute()
         {
-            string output = "";
+            string output= "", token = "", param = "";
             string reqPath = _req.Header["Path"];
-            string token = "";
+
             if (_req.Header.ContainsKey("Authorization"))
                 token = _req.Header["Authorization"];
+
+            if(reqPath.Contains("/") && reqPath != "transactions/packages")
+            {
+                string[] wholePath = reqPath.Split("/");
+                reqPath = wholePath[0];
+                param = wholePath[1];
+            }
 
             if (_req.ReqMethod == requestType.POST)
             {
@@ -38,20 +45,22 @@ namespace MonsterCardGame.Server
                 output = _req.ReadHttpBody(contentLength);
                 Handler handleObj = _methodDict[reqPath];
                 handleObj.DeserializeMessage(output);
+                handleObj.Param = param;
                 handleObj.Handle(_res, token);
             }
             if (_req.ReqMethod == requestType.GET)
             {
                 InitGetDic();
+                if (reqPath.Contains("?"))
+                {
+                    string[] wholePath = reqPath.Split("?");
+                    reqPath = wholePath[0];
+                    param = wholePath[1];
+                }
                 Handler handleObj = _methodDict[reqPath];
+                handleObj.Param = param;
                 handleObj.Handle(_res, token);
             }
-            /*
-            if (reqPath.Contains("/") || reqPath.Contains("?"))
-            {
-                //further checking of path=> users/martin
-            }
-            */
         }
 
         //mapping routes to handlers
@@ -64,7 +73,8 @@ namespace MonsterCardGame.Server
 
         private void InitGetDic()
         {
-            this._methodDict.Add("cards", new ShowCardsHandle(AuthLevel.Login));
+            this._methodDict.Add("cards", new ShowStack(AuthLevel.Login));
+            this._methodDict.Add("deck", new ShowDeck(AuthLevel.Login));
         }
 
 
