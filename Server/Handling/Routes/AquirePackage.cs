@@ -27,7 +27,6 @@ namespace MonsterCardGame.Server
             if (!CheckAuth(res, token))
                 return;
             int packageCost = 5;
-            var random = HTTPServer.random;
             string username;
             if(!Session.SessionDic.TryGetValue(token,out username))
             {
@@ -50,35 +49,57 @@ namespace MonsterCardGame.Server
 
             //aquire random package
             Console.WriteLine("Aquiring Package...");
-            IPackageDao packageDao = new PackageDao();
-            List<PackageModel> packageIDList = packageDao.GetAllUnaquiredPackages();
-            if(packageIDList.Count == 0)
+            PackageModel aquiredPacakge =  SetPackagesOwner(username);
+            if(aquiredPacakge == null)
             {
-                Console.WriteLine("Error: No available package");
                 res.SendResponse(responseType.ERR, "{message: no packages available, please contact admin}");
                 return;
             }
-            int index = random.Next(packageIDList.Count);
-            PackageModel aquiredPacakge = new PackageModel(packageIDList[index].PackageID, username);
-            aquiredPacakge.SetUID();
-            if (packageDao.AquirePackage(aquiredPacakge) != 0)
-            {
-                res.SendResponse(responseType.ERR, "{message: could not aquire desired package, please contact admin}");
-                return;
-            }
 
+            //pay for package
             if(userDao.PayWithCoins(user.Username, 5) != 0) 
             {
                 string message = "{message: some error occured while trying to pay coins}";
                 res.SendResponse(responseType.ERR, message);
                 return;
             }
-            Console.WriteLine($"{aquiredPacakge.Username} aquired package { aquiredPacakge.PackageID}");
+            Console.WriteLine($"{username} aquired package { aquiredPacakge.PackageID}");
             JObject obj = new JObject();
             obj["message"] = "Aquired package successfully";
             obj["packageID"] = aquiredPacakge.PackageID;
-            //obj["username"] = aquiredPacakge.Username;
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
+        }
+
+        //Function to aquire packages => in Cards DB owner and check field in Packages
+        private PackageModel SetPackagesOwner(string username)
+        {
+            var random = HTTPServer.random;
+            IPackageDao packageDao = new PackageDao();
+            ICardDao cardao = new CardDao();
+            List<PackageModel> packageIDList = packageDao.GetAllUnaquiredPackages();
+            if (packageIDList.Count == 0)
+            {
+                Console.WriteLine("Error: No available package");
+                return null;
+            }
+            int index = random.Next(packageIDList.Count);
+            PackageModel aquiredPacakge = new PackageModel(packageIDList[index].PackageID);
+            List<CardModel> cardList = cardao.showPackageCards(aquiredPacakge);     // all cards in package
+            foreach (var card in cardList)          //add user data into model => for db input
+            {
+                card.Username = username;
+                card.SetUID();
+                if (cardao.ChangeCardsOwner(card) != 0)     //change owner in card table
+                {
+                    Console.WriteLine("chaning card Owner went wrong");
+                    return null;
+                }
+            }
+
+            if (packageDao.AquirePackage(aquiredPacakge) != 0)      //mark check in package table => no further aquiring allowed
+                return null;
+
+            return aquiredPacakge;
         }
     }
 }

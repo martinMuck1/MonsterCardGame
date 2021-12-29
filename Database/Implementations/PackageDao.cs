@@ -37,7 +37,7 @@ namespace MonsterCardGame.Database
         public List<PackageModel> GetAllUnaquiredPackages()
         {
             List<PackageModel> packageList = new List<PackageModel>();
-            string sql = "SELECT \"packageID\" FROM packages WHERE owner IS NULL;";
+            string sql = "SELECT \"packageID\" FROM packages WHERE aquired IS false;";
             using var query = new NpgsqlCommand(sql, _db.Conn);
             query.Prepare();
             NpgsqlDataReader dr = query.ExecuteReader();
@@ -54,9 +54,10 @@ namespace MonsterCardGame.Database
         {
             try
             {
-                string sql = "UPDATE packages SET owner = @username WHERE \"packageID\" = @packageID;";
+                //string sql = "UPDATE packages SET owner = @username WHERE \"packageID\" = @packageID;";
+                string sql = "UPDATE packages SET aquired = true WHERE \"packageID\" = @packageID;";
                 using var query = new NpgsqlCommand(sql, _db.Conn);
-                query.Parameters.AddWithValue("username", aquiredPackage.UID);
+                //query.Parameters.AddWithValue("username", aquiredPackage.UID);
                 query.Parameters.AddWithValue("packageID", aquiredPackage.PackageID);
                 query.Prepare();
                 query.ExecuteNonQuery();

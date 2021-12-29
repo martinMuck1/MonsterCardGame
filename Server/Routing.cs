@@ -21,7 +21,6 @@ namespace MonsterCardGame.Server
         {
             this._req = req;
             this._res = res;
-            InitDic();
         }
 
         public void FindRoute()
@@ -34,27 +33,38 @@ namespace MonsterCardGame.Server
 
             if (_req.ReqMethod == requestType.POST)
             {
+                InitPostDic();
                 int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
                 output = _req.ReadHttpBody(contentLength);
+                Handler handleObj = _methodDict[reqPath];
+                handleObj.DeserializeMessage(output);
+                handleObj.Handle(_res, token);
             }
-
+            if (_req.ReqMethod == requestType.GET)
+            {
+                InitGetDic();
+                Handler handleObj = _methodDict[reqPath];
+                handleObj.Handle(_res, token);
+            }
             /*
             if (reqPath.Contains("/") || reqPath.Contains("?"))
             {
                 //further checking of path=> users/martin
             }
             */
-            Handler handleObj = _methodDict[reqPath];
-            handleObj.DeserializeMessage(output);
-            handleObj.Handle(_res, token);
         }
 
         //mapping routes to handlers
-        private void InitDic(){
+        private void InitPostDic(){
             this._methodDict.Add("users", new UserHandle(AuthLevel.noLogin));
             this._methodDict.Add("sessions", new LoginHandle(AuthLevel.noLogin));
             this._methodDict.Add("packages", new CreatePackage(AuthLevel.Admin));
             this._methodDict.Add("transactions/packages", new AquirePackage(AuthLevel.Login));
+        }
+
+        private void InitGetDic()
+        {
+            this._methodDict.Add("cards", new ShowCardsHandle(AuthLevel.noLogin));
         }
 
 
