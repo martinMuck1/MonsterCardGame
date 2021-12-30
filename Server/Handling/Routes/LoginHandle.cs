@@ -39,9 +39,9 @@ namespace MonsterCardGame.Server
             if ((status = userdao.LoginUser(new UserModel(_reqUser.userName, _reqUser.password))) != 0)
             {
                 if(status == -1)
-                    res.SendResponse(responseType.ERR, "{message: Query got rejected from DB}");
+                    res.SendResponse(responseType.ERR, "{\"message\": \"Query got rejected from DB\"}");
                 if(status == -2)
-                    res.SendResponse(responseType.UNAUTHORIZED, "{message: User does not exist or pw wrong}");
+                    res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"User does not exist or pw wrong\"}");
                 return;
             }
             Console.WriteLine("Login was successfull");

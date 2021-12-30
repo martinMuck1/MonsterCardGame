@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 
 namespace MonsterCardGame.Server
 {
-    public class ShowDeck :Handler
+    public class GetDeck :Handler
     {
-        public ShowDeck( AuthLevel level) :base(level)
+        public GetDeck( AuthLevel level) :base(level)
         {
             
         }
@@ -42,7 +42,7 @@ namespace MonsterCardGame.Server
             if(modelDeck == null)
             {
                 Console.WriteLine("No cards in user deck");
-                res.SendResponse(responseType.ERR, "message: no cards in your deck yet!");
+                res.SendResponse(responseType.ERR, "\"message\": \"no cards in your deck yet!\"");
                 return;
             }
             List<CardModel> cardList = new List<CardModel>();

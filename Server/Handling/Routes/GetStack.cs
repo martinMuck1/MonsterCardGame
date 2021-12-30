@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 
 namespace MonsterCardGame.Server
 {
-    public class ShowStack :Handler
+    public class GetStack :Handler
     {
-        public ShowStack( AuthLevel level) :base(level)
+        public GetStack( AuthLevel level) :base(level)
         {
             
         }

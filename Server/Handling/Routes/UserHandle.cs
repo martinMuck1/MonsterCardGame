@@ -38,13 +38,13 @@ namespace MonsterCardGame.Server
             UserModel user;
             if (userdao.CreateUser((user = new UserModel(_reqUser.userName, _reqUser.password))) != 0)
             {
-                res.SendResponse(responseType.ERR, "{message: User already exists!}");
+                res.SendResponse(responseType.ERR, "{\"message\": \"User already exists!\"}");
                 return;
             }
             user.SetUID();
             if (deckdao.CreateDeck(user) != 0)
             {
-                res.SendResponse(responseType.ERR, "{message: UserDeck already exists!}");
+                res.SendResponse(responseType.ERR, "{\"message\": \"UserDeck already exists!\"}");
                 return;
             }
             Console.WriteLine("Created User successfully");

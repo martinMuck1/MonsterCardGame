@@ -27,7 +27,7 @@ namespace MonsterCardGame.Server
                 if (!Session.SessionDic.ContainsKey(token))
                 {
                     Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
-                    res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
+                    res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"access denied\"}");
                     return false;
                 }
                 //request token is in memory => permission accepted
@@ -39,7 +39,7 @@ namespace MonsterCardGame.Server
                 if (!Session.SessionDic.ContainsKey(token))
                 {
                     Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
-                    res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
+                    res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"access denied\"}");
                     return false;
                 }
 
@@ -49,7 +49,7 @@ namespace MonsterCardGame.Server
                     return true;
                 }
             }
-            res.SendResponse(responseType.UNAUTHORIZED, "{message: access denied}");
+            res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"access denied\"}");
             return false;
         }
 

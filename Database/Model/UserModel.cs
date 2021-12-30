@@ -12,6 +12,10 @@ namespace MonsterCardGame.Database
         public string Password { get; private set; }
         public string Token { get; private set; }
         public int UID { get; set; }
+        public string Name { get; private set; }
+        public string Bio { get; private set; }
+        public string Image { get; private set; }
+
 
         public UserModel(string username, string password)
         {
@@ -24,6 +28,14 @@ namespace MonsterCardGame.Database
         {
             this.Username = username;
         }
+        public UserModel(string username,string name, string bio, string image)
+        {
+            this.Username = username;
+            this.Name = name;
+            this.Bio = bio;
+            this.Image = image;
+        }
+
         public void SetUID()
         {
             this.UID = DBHelper.ConvertNameToID(this.Username);

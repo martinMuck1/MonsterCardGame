@@ -83,13 +83,15 @@ namespace MonsterCardGame.Server
 
         private void InitGetDic()
         {
-            this._methodDict.Add("cards", new ShowStack(AuthLevel.Login));
-            this._methodDict.Add("deck", new ShowDeck(AuthLevel.Login));
+            this._methodDict.Add("cards", new GetStack(AuthLevel.Login));
+            this._methodDict.Add("deck", new GetDeck(AuthLevel.Login));
+            this._methodDict.Add("users", new GetUserData(AuthLevel.Login));
         }
 
         private void InitPutDic()
         {
-            this._methodDict.Add("deck", new DefineDeck(AuthLevel.Login));
+            this._methodDict.Add("deck", new PutDeck(AuthLevel.Login));
+            this._methodDict.Add("users", new PutUserData(AuthLevel.Login));
         }
 
     }

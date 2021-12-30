@@ -35,6 +35,47 @@ namespace MonsterCardGame.Database
             }
         }
 
+        public int UpdateUserData(UserModel user)
+        {
+            try
+            {
+                string sql = "UPDATE users SET name = @name, bio = @bio, image = @image WHERE username = @username;";
+                using var query = new NpgsqlCommand(sql, _db.Conn);
+                query.Parameters.AddWithValue("name", user.Name);
+                query.Parameters.AddWithValue("bio", user.Bio);
+                query.Parameters.AddWithValue("image", user.Image);
+                query.Parameters.AddWithValue("username", user.Username);
+                query.Prepare();
+                query.ExecuteNonQuery();
+                return 0;
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                //Console.WriteLine(e);
+                Console.WriteLine("DB Error: Updating User Data went wrong");
+                return -1;
+            }
+        }
+
+        public int PayWithCoins(string username, int amount)
+        {
+            try
+            {
+                string sql = "UPDATE users SET coins = coins - @amount WHERE username = @username;";
+                using var query = new NpgsqlCommand(sql, _db.Conn);
+                query.Parameters.AddWithValue("amount", amount);
+                query.Parameters.AddWithValue("username", username);
+                query.Prepare();
+                query.ExecuteNonQuery();
+                return 0;
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine("DB Error: Updating coins failed");
+                return -1;
+            }
+        }
         public int LoginUser(UserModel user)
         {
             try
@@ -66,25 +107,6 @@ namespace MonsterCardGame.Database
             return (Int32)query.ExecuteScalar();
         }
 
-        public int PayWithCoins(string username, int amount)
-        {
-            try
-            {
-                string sql = "UPDATE users SET coins = coins - @amount WHERE username = @username;";
-                using var query = new NpgsqlCommand(sql, _db.Conn);
-                query.Parameters.AddWithValue("amount", amount);
-                query.Parameters.AddWithValue("username", username);
-                query.Prepare();
-                query.ExecuteNonQuery();
-                return 0;
-            }
-            catch (Npgsql.PostgresException e)
-            {
-                Console.WriteLine(e);
-                Console.WriteLine("DB Error: Updating coins failed");
-                return -1;
-            }
-        }
 
         public int GetUserID(string username)
         {
@@ -94,6 +116,28 @@ namespace MonsterCardGame.Database
             query.Prepare();
             return (Int32)query.ExecuteScalar();
         }
+
+        public UserModel GetUserData(string username)
+        {
+            UserModel tmpModel = null;
+            string sql = "SELECT name,bio,image FROM users WHERE username = @username ;";
+            using var query = new NpgsqlCommand(sql, _db.Conn);
+            query.Parameters.AddWithValue("username", username);
+            query.Prepare();
+            NpgsqlDataReader dr = query.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr[0] is DBNull || dr[1] is DBNull || dr[2] is DBNull)
+                {
+                    dr.Close();
+                    return new UserModel(username,"","","");
+                }
+                tmpModel = new UserModel(username, (string)dr[0], (string)dr[1], (string)dr[2]);
+            }
+            dr.Close();
+            return tmpModel;
+        }
+
         /*
         public int PersistToken(UserModel user)
         {

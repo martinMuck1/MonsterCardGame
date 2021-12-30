@@ -43,7 +43,7 @@ namespace MonsterCardGame.Server
             if (tmpBalance < packageCost)
             {
                 Console.WriteLine("Error: not enough coins for transaction");
-                res.SendResponse(responseType.ERR, "{message: user does not have enough balance to aquire package!}");
+                res.SendResponse(responseType.ERR, "{\"message\": \"user does not have enough balance to aquire package!\"}");
                 return;
             }
 
@@ -52,14 +52,14 @@ namespace MonsterCardGame.Server
             PackageModel aquiredPacakge =  SetPackagesOwner(username);
             if(aquiredPacakge == null)
             {
-                res.SendResponse(responseType.ERR, "{message: no packages available, please contact admin}");
+                res.SendResponse(responseType.ERR, "{\"message\": \"no packages available, please contact admin\"}");
                 return;
             }
 
             //pay for package
             if(userDao.PayWithCoins(user.Username, 5) != 0) 
             {
-                string message = "{message: some error occured while trying to pay coins}";
+                string message = "{\"message\": \"some error occured while trying to pay coins\"}";
                 res.SendResponse(responseType.ERR, message);
                 return;
             }

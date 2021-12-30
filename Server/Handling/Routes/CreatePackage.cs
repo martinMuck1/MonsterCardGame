@@ -48,7 +48,7 @@ namespace MonsterCardGame.Server
             if ((errCode = packdao.CreatePackage(package)) != 0)        //create package id
             {
                 if(errCode == -1)
-                    res.SendResponse(responseType.ERR, "{message: Package ID probably already exists}");
+                    res.SendResponse(responseType.ERR, "{\"message\": \"Package ID probably already exists\"}");
                 return;
             }
 
@@ -57,7 +57,7 @@ namespace MonsterCardGame.Server
                 CardModel tmpCardObj = new CardModel(card.id, card.name, card.damage);
                 if (carddao.CreateCard(tmpCardObj, package.PackageID) != 0)
                 {
-                    res.SendResponse(responseType.ERR, "{message: at least one Card ID already exists}");
+                    res.SendResponse(responseType.ERR, "{\"message\": \"at least one Card ID already exists\"}");
                     return;
                 }
             }
