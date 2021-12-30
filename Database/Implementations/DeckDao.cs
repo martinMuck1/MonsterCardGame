@@ -67,7 +67,10 @@ namespace MonsterCardGame.Database
             while (dr.Read())
             {
                 if(dr[1] is DBNull || dr[2] is DBNull || dr[3] is DBNull || dr[4] is DBNull)
+                {
+                    dr.Close();
                     return null;
+                }
                 tmpModel = new DeckModel(uid, (string)dr[0], (string)dr[1], (string)dr[2], (string)dr[3]);
             }
             dr.Close();

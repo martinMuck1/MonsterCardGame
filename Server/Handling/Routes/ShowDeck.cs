@@ -50,9 +50,19 @@ namespace MonsterCardGame.Server
             {
                 cardList.Add(cardao.ShowSingleCard(cardID));
             }
-            JArray array = ListToJSON(cardList);
-            Console.WriteLine("Sent User deck");
-            res.SendResponse(responseType.OK, JsonConvert.SerializeObject(array));
+
+            if(this.Param == "format=plain")        // get request with special format
+            {
+                res.SetResponseTypeToPlain();
+                var stringList = cardList.Select(x =>string.Join(",", x.CardID, x.Name.Trim(), x.Damage));
+                res.SendResponse(responseType.OK, string.Join("\n", stringList.ToArray()));
+            }
+            else
+            {   //json output
+                JArray array = ListToJSON(cardList);
+                Console.WriteLine("Sent User deck");
+                res.SendResponse(responseType.OK, JsonConvert.SerializeObject(array));
+            }
         }
     }
 }

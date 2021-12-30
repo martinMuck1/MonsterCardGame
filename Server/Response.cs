@@ -18,6 +18,7 @@ namespace MonsterCardGame.Server
         public responseType RespType { get; private set; }
         public string Message { get; private set; } = "";
         private int _contentLength;
+        private string _responseFormat = "application/json";
 
         //private _contentType = "
         public Response(StreamWriter writer)
@@ -41,12 +42,16 @@ namespace MonsterCardGame.Server
             Send();
         }
 
+        public void SetResponseTypeToPlain()
+        {
+            this._responseFormat = "text/plain";
+        }
+
         private void Send()
         {
-            //TODO: mit dictionary
             this.Writer.WriteLine($"HTTP/1.1 {(int)this.RespType}");
             this.Writer.WriteLine($"Content-Length: {this._contentLength}"); 
-            this.Writer.WriteLine("Content-Type: application/json");
+            this.Writer.WriteLine($"Content-Type: {this._responseFormat} ");
             this.Writer.WriteLine("Connection: Closed");
             this.Writer.WriteLine("");
             

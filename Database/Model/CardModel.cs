@@ -17,7 +17,7 @@ namespace MonsterCardGame.Database
         public CardModel(string cardID,string name, double damage)
         {
             this.CardID = cardID;
-            this.Name = name;
+            this.Name = name.Trim();
             this.Damage = damage;
         }
         public CardModel(string cardID, string username)

@@ -46,16 +46,24 @@ namespace MonsterCardGame.Server
             CardDao carddao = new CardDao();
             UserModel modelUser = new UserModel(username);
             DeckModel modelDeck = new DeckModel(DBHelper.ConvertNameToID(modelUser.Username), _reqCard[0], _reqCard[1], _reqCard[2], _reqCard[3]);
-            /*      Check if cards belong to this user 
-            List<CardModel> cardList = carddao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username));
 
-            foreach (var cardID in modelDeck.Card)
+            // Check if cards belong to this user 
+            List<CardModel> cardList = carddao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username));
+            var cardIDList = cardList.Select(x => x.CardID);
+            var test2NotInTest1 = modelDeck.Card.Where(w => cardIDList.Contains(w)).ToList();       //check if cards of deck are in aquired cards
+            if (test2NotInTest1.Count() != 4)
             {
-                if (cardList.Contains(cardID))
-                    break
+                Console.WriteLine("User tried to put cards into deck which dont belong to him/her!");
+                res.SendResponse(responseType.UNAUTHORIZED, "{message: Some cardIDs dont belong to you!}");
+                return;
             }
-            var test2NotInTest1 = cardList.Where(t2 => modelDeck.Count(t1 => t2.Contains(t1)) == 0);
-            */
+            if (deckdao.ShowDeckCards(DBHelper.ConvertNameToID(modelUser.Username)) != null)
+            {
+                res.SendResponse(responseType.ERR, "{message: Your deck is already defined!}");
+                Console.WriteLine("User Deck already set!");
+                return;
+            }
+
             if (deckdao.AddCardsToDeck(modelDeck) != 0)
             {
                 res.SendResponse(responseType.ERR, "{message: could not set cards in deck}");
