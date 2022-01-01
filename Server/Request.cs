@@ -51,8 +51,8 @@ namespace MonsterCardGame.Server
                 if (line.ToLower().StartsWith("authorization:"))
                 {
                     string tmp = line.Substring(15).Trim();
-                    string[] val = tmp.Split(" "); 
-                    if(val.Length != 2 || val[0] != "Basic")
+                    string[] val = tmp.Split(" ");
+                    if (val.Length != 2 || val[0] != "Basic")
                         return responseType.UNAUTHORIZED;
 
                     Header.Add("Authorization", val[1].Trim());

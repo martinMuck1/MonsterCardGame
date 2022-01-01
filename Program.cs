@@ -13,6 +13,7 @@ namespace MonsterCardGame
         static async Task Main(string[] args)
         {
             HTTPServer myTCPconn = new HTTPServer(10001);
+            //Task task1 = Task.Factory.StartNew(async() => await myTCPconn.StartServerAsync());
             await myTCPconn.StartServerAsync();
             
             /*
