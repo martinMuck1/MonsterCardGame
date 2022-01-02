@@ -117,6 +117,21 @@ namespace MonsterCardGame.Database
             return (Int32)query.ExecuteScalar();
         }
 
+        public List<UserModel> GetAllUsers()
+        {
+            List<UserModel> tmpModel = new List<UserModel>();
+            string sql = "SELECT uid, username FROM users;";
+            using var query = new NpgsqlCommand(sql, _db.Conn);
+            query.Prepare();
+            NpgsqlDataReader dr = query.ExecuteReader();
+            while (dr.Read())
+            {
+                tmpModel.Add(new UserModel((int)dr[0], (string)dr[1]));
+            }
+            dr.Close();
+            return tmpModel;
+        }
+
         public UserModel GetUserData(string username)
         {
             UserModel tmpModel = null;

@@ -16,6 +16,7 @@ namespace MonsterCardGame.Server
         //registers only logged in users in dictionary
         public static Dictionary<string, string> SessionDic { get; } = new Dictionary<string, string>();
 
+        static readonly object _lockObject = new object();
         public static void AddEntry(string token, string username) {
             //string tmpGuid =  Guid.NewGuid().ToString();
             SessionDic.Add(token, username);

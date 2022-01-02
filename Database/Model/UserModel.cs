@@ -28,6 +28,12 @@ namespace MonsterCardGame.Database
         {
             this.Username = username;
         }
+
+        public UserModel( int uid, string username)
+        {
+            this.Username = username;
+            this.UID = uid;
+        }
         public UserModel(string username,string name, string bio, string image)
         {
             this.Username = username;

@@ -35,6 +35,7 @@ namespace MonsterCardGame.Server
 
             IUserDao userdao = new UserDao();
             IDeckDao deckdao = new DeckDao();
+            IScoreDao scoredao = new ScoreDao();
             UserModel user;
             if (userdao.CreateUser((user = new UserModel(_reqUser.userName, _reqUser.password))) != 0)
             {
@@ -45,6 +46,11 @@ namespace MonsterCardGame.Server
             if (deckdao.CreateDeck(user) != 0)
             {
                 res.SendResponse(responseType.ERR, "{\"message\": \"UserDeck already exists!\"}");
+                return;
+            }
+            if (scoredao.CreateScoreStats(user) != 0)
+            {
+                res.SendResponse(responseType.ERR, "{\"message\": \"Score Stats already exists!\"}");
                 return;
             }
             Console.WriteLine("Created User successfully");
