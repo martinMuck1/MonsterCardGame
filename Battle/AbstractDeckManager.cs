@@ -5,15 +5,61 @@ using System.Text;
 using System.Threading.Tasks;
 using MonsterCardGame.Cards;
 
-namespace MonsterCardGame.DeckManage
+namespace MonsterCardGame.Battle
 {
-    class AbstractDeckManager
+    public class AbstractDeckManager
     {
-        public List<AbstractCard> cardCollection = new List<AbstractCard>();    //change to protected 
+        protected List<AbstractCard> _cardCollection = new List<AbstractCard>();   
+
         public AbstractDeckManager()
         {
         }
 
+        //Factory for Cards => input is from db (cardModels)
+        public static AbstractCard GetAbstractCard(string cardname, int strength)
+        {
+            AbstractCard tmpCard = null;
+            switch (cardname)
+            {
+                case "Dragon": 
+                    tmpCard = new FireDragon(strength);
+                    break;
+                case "FireElf":
+                    tmpCard = new FireElves(strength);
+                    break;
+                case "Troll":
+                    tmpCard = new FireTroll(strength);
+                    break;
+                case "Knight":
+                    tmpCard = new NormalKnight(strength);
+                    break;
+                case "Ork":
+                    tmpCard = new NormalOrk(strength);
+                    break;
+                case "Wizzard":
+                    tmpCard = new NormalWizzard(strength);
+                    break;
+                case "WaterGoblin":
+                    tmpCard = new WaterGoblin(strength);
+                    break;
+                case "Kraken":
+                    tmpCard = new WaterKraken(strength);
+                    break;
+                case "FireSpell":
+                    tmpCard = new FireSpell(strength);
+                    break;
+                case "RegularSpell":
+                    tmpCard = new NormalSpell(strength);
+                    break;
+                case "WaterSpell":
+                    tmpCard = new WaterSpell(strength);
+                    break;
+                default:
+                    break;
+            }
+            return tmpCard;
+        }
+        /*
         public AbstractCard CreateRandomCard()      //returns a random CardType with random strength
         {
             AbstractCard card = null;
@@ -70,27 +116,28 @@ namespace MonsterCardGame.DeckManage
             int num = rnd.Next(10,100); //>= 10 and <= 99
             return num;
         }
+        */
         public void AddCard(AbstractCard card)
         {
-            this.cardCollection.Add(card);
+            this._cardCollection.Add(card);
         }
 
         public void RemoveCard(int index)
         {
-            this.cardCollection.RemoveAt(index);
+            this._cardCollection.RemoveAt(index);
         }
          public AbstractCard showCard(int index)
         {
-            return this.cardCollection[index];
+            return this._cardCollection[index];
         }
         public int getSizeStack()
         {
-            return this.cardCollection.Count();
+            return this._cardCollection.Count();
         }
 
         public void showAllCards()
         {
-            foreach (var item in this.cardCollection)
+            foreach (var item in this._cardCollection)
             {
                 Console.WriteLine("{0} : {1}",item.Name,item.Damage);
             }

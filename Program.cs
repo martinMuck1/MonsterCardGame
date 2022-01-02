@@ -1,6 +1,5 @@
 ﻿using MonsterCardGame.Battle;
 using MonsterCardGame.Cards;
-using MonsterCardGame.Users;
 using MonsterCardGame.Server;
 using System.Threading.Tasks;
 

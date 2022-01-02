@@ -42,6 +42,7 @@ namespace MonsterCardGame.Server
             obj["elo"] = scoreModel.Elo;
             obj["wins"] = scoreModel.Wins;
             obj["games"] = scoreModel.Games;
+            obj["loses"] = scoreModel.Loses;
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
             Console.WriteLine("Sent User Stats");
         }

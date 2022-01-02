@@ -4,42 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MonsterCardGame.Cards;
-using MonsterCardGame.Users;
-using MonsterCardGame.DeckManage;
+using MonsterCardGame.Server;
 
 namespace MonsterCardGame.Battle
 {
-    enum Outcome
+    public enum Outcome
     {
         winnerA,
         winnerB,
         deuce
     }
-    class Fight
+    public class Fight
     {
         Players _playerA;
         Players _playerB;
 
-        public Fight(ref Players playerA, ref Players playerB)
+        public Fight(Players playerA, Players playerB)
         {
             this._playerA = playerA;
             this._playerB = playerB;
         }
 
-        public void startFight()        //whole fight of two players with their decks
+        public Outcome startFight()        //whole fight of two players with their decks
         {
-            Outcome tmpResult;
-            Random rnd = new Random();
+            Outcome tmpResult, endresult = Outcome.deuce;
+            Random rnd = HTTPServer.random;
             int deckNrA, deckNrB;
-            AbstractDeckManager deckA= _playerA.myDeck, deckB = _playerB.myDeck;
+            AbstractDeckManager deckA= _playerA.MyDeck, deckB = _playerB.MyDeck;
 
             //for demonstration purpose
-            Console.WriteLine("\nPlayer A: ");
+            Console.WriteLine("-------- Start Figth---------");
+            Console.WriteLine($"Player A({_playerA.Name}): ");
             deckA.showAllCards();
-            Console.WriteLine("\nPlayer B:");
+            Console.WriteLine($"Player B({_playerB.Name}): ");
             deckB.showAllCards();
             Console.WriteLine();
-
 
             //get count of cards from each player
             //play one round with random cards => loser loses card
@@ -62,6 +61,7 @@ namespace MonsterCardGame.Battle
                     if (countA == 1)        //last card count from opponent was 1 + he lost again = loser
                     {
                         Console.WriteLine($"{_playerB.Name} won the battle!");
+                        endresult = Outcome.winnerB;
                         break;
                     }
                 }
@@ -73,10 +73,13 @@ namespace MonsterCardGame.Battle
                     if (countB == 1)
                     {
                         Console.WriteLine($"{_playerA.Name} won the battle!");
+                        endresult = Outcome.winnerA;
                         break;
                     }
                 }
             }
+            Console.WriteLine("-------- End Figth---------");
+            return endresult;
         }
 
         //round = compare adapted damage of cards

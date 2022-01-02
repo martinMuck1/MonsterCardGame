@@ -51,6 +51,7 @@ namespace MonsterCardGame.Server
                 obj["elo"] = singleScore.Elo;
                 obj["wins"] = singleScore.Wins;
                 obj["games"] = singleScore.Games;
+                obj["loses"] = singleScore.Loses;
                 array.Add(obj);
             }
 

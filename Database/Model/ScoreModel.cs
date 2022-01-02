@@ -13,19 +13,28 @@ namespace MonsterCardGame.Database
         public int UID { get; set; }
         public int Elo { get; private set; }
         public int Wins { get; private set; }
-        public int Games { get; private set; }
+        public int Loses { get; private set; }
+        public int Games { get; private  set; }
 
         public ScoreModel(string username)
         {
             this.Username = username;
             SetUID();
         }
-        public ScoreModel(int uid,int elo, int wins, int games)
+        public void ScoreModelOffset(int elo, int wins, int games, int loses)
+        {
+            this.Elo = elo;
+            this.Wins = wins;
+            this.Games = games;
+            this.Loses = loses;
+        }
+        public ScoreModel(int uid,int elo, int wins, int games, int loses)
         {
             this.UID = uid;
             this.Elo = elo;
             this.Wins = wins;
             this.Games = games;
+            this.Loses = loses;
         }
 
         public void SetUID()

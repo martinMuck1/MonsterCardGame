@@ -12,7 +12,7 @@ namespace MonsterCardGame.Cards
         fire,
         normal 
     }
-    abstract class AbstractCard : ICard
+    public abstract class AbstractCard : ICard
     {
         public string Name { get; private set; }
         public int Damage { get; private set; }     //damage cant be changed
@@ -92,8 +92,6 @@ namespace MonsterCardGame.Cards
 
             return tmpDamage;
         }
-
-        
 
     }
 }
