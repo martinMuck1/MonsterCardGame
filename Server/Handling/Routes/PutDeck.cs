@@ -47,6 +47,18 @@ namespace MonsterCardGame.Server
             UserModel modelUser = new UserModel(username);
             DeckModel modelDeck = new DeckModel(DBHelper.ConvertNameToID(modelUser.Username), _reqCard[0], _reqCard[1], _reqCard[2], _reqCard[3]);
 
+            //check if any card is in trade offer
+            TradeDao tradedao = new TradeDao();
+            List<TradeModel> modelTList = tradedao.ShowAllTradeOffers();
+            var modelIDList = modelTList.Select((x) => x.CardToTrade);
+            var modelListTradeCards = modelDeck.Card.Where(w => modelIDList.Contains(w)).ToList();
+            if(modelListTradeCards.Count() > 0)
+            {
+                Console.WriteLine("Desired Deck cards are in a trade offer");
+                res.SendResponse(responseType.ERR, "{\"message\": \"Your desired deck cards are in a tradeoffer!\"}");
+                return;
+            }
+
             // Check if cards belong to this user 
             List<CardModel> cardList = carddao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username));
             var cardIDList = cardList.Select(x => x.CardID);

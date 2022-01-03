@@ -40,46 +40,59 @@ namespace MonsterCardGame.Server
             if (!CheckAuth(res, token))
                 return;
             string username = "";
-            if (Param == "")
-            {            
-                if (!CheckOwnerCard(token, _offer.CardToTrade, out username))
+            int result;
+
+            string cardID = (Param == "") ? _offer.CardToTrade : _tradeCard;
+            if ((result = CheckOwnerCard(token, cardID, out username)) != 0)
+            {
+                if (result == -1)
                 {
                     res.SendResponse(responseType.ERR, "{\"message\": \"This card does not belong to you!\"}");
                     Console.WriteLine("Card does not belong to user");
-                    return;
                 }
+                else
+                {
+                    res.SendResponse(responseType.ERR, "{\"message\": \"You cant trade card if its in your deck\"}");
+                    Console.WriteLine("Card is in user Deck!");
+                }
+                return;
+            }
+
+            if (Param == "")
+            {            
                 CreateTradeOffer(res, username);
             }
             else
             {
-                if (!CheckOwnerCard(token, _tradeCard, out username))
-                {
-                    res.SendResponse(responseType.ERR, "{\"message\": \"This card does not belong to you!\"}");
-                    Console.WriteLine("Card does not belong to user");
-                    return;
-                }
                 StartTrade(res, username);
             }
 
         }
 
         /*check if cardID from request belongs to the user */
-        private  bool CheckOwnerCard(string token, string cardID,out string username) 
+        private  int CheckOwnerCard(string token, string cardID,out string username) 
         {
             if (!Session.SessionDic.TryGetValue(token, out username))
             {
                 //key is not in dic => should not happen cause of checkauth
                 Console.WriteLine("Key not in Dictionary");
-                return false;
+                return -1;
             }
             CardDao carddao = new CardDao();
             List<CardModel> cardList = carddao.ShowAquiredCards(DBHelper.ConvertNameToID(username));    //get cards of user
             var cardIDList = cardList.Select(x => x.CardID); 
             if (!cardIDList.Contains(cardID))
             {
-                return false;
+                return -1;
             }
-            return true;
+
+            //further check of card is in deck
+            DeckDao deckdao = new DeckDao();
+            DeckModel modelD = deckdao.ShowDeckCards(DBHelper.ConvertNameToID(username));
+            if (modelD.Card.Contains(cardID))
+                return -2;
+
+            return 0;
         }
 
         private void CreateTradeOffer(Response res, string username)

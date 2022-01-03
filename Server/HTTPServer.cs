@@ -14,7 +14,7 @@ namespace MonsterCardGame.Server
     class HTTPServer
     {
         private TcpListener listener;
-        public static Random random = new Random();
+        public static Random random = new Random(0);
 
         public HTTPServer(int portNum)  //start server at 127.0.0.1 at Port 8000
         {
