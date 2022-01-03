@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class NormalOrk: AbstractMonster
+    public class NormalOrk: AbstractMonster
     {
         public NormalOrk(int strenght):base("Ork", strenght, ElementType.normal)
         {

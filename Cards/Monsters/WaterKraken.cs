@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class WaterKraken: AbstractMonster
+    public class WaterKraken: AbstractMonster
     {
         public WaterKraken(int strenght):base("Kraken", strenght, ElementType.water)
         {

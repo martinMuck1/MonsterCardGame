@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class WaterGoblin: AbstractMonster
+    public class WaterGoblin: AbstractMonster
     {
         public  WaterGoblin(int strenght) :base("Goblin",strenght, ElementType.water)
         {

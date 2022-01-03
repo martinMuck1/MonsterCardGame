@@ -53,7 +53,7 @@ namespace MonsterCardGame.Battle
                 deckNrB = rnd.Next(countB);
                 AbstractCard cardB = deckB.showCard(deckNrB);
   
-                tmpResult = RoundFight(ref cardA, ref cardB);
+                tmpResult = RoundFight( cardA, cardB);
                 if(tmpResult == Outcome.winnerB)
                 {
                     deckA.RemoveCard(deckNrA);
@@ -83,7 +83,7 @@ namespace MonsterCardGame.Battle
         }
 
         //round = compare adapted damage of cards
-        public Outcome RoundFight(ref AbstractCard cardA,ref AbstractCard cardB)    
+        public static Outcome RoundFight( AbstractCard cardA, AbstractCard cardB)    
         {
             Outcome tmpOutcome;
             int tmpDamageCardA = cardA.AdaptDamage(cardB);

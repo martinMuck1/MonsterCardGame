@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    abstract class AbstractMonster : AbstractCard
+    public abstract class AbstractMonster : AbstractCard
     {
         protected AbstractMonster(string name, int damage, ElementType element):base(name,damage,element)
         {

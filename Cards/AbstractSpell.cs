@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class AbstractSpell: AbstractCard
+    public class AbstractSpell: AbstractCard
     {
         public AbstractSpell(string name, int damage, ElementType element):base(name, damage, element)
         {

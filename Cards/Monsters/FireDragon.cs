@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class FireDragon : AbstractMonster
+    public class FireDragon : AbstractMonster
     {
         public FireDragon(int strenght) : base("Dragon", strenght, ElementType.fire)
         {

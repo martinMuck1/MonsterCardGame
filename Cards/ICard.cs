@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    interface ICard
+    public interface ICard
     {
+        public string Name { get; }
+        public int Damage { get; }  
+        public ElementType Element { get; }
         int AdaptDamage(AbstractCard opponent);
     }
 }

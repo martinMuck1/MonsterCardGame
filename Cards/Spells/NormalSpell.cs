@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Cards
 {
-    class NormalSpell : AbstractSpell  
+    public class NormalSpell : AbstractSpell  
     {
         public NormalSpell(int strenght) : base("NormalSpell", strenght, ElementType.normal)
         {
