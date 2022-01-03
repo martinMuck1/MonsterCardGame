@@ -40,12 +40,20 @@ namespace MonsterCardGame.Server
 
             if (_req.ReqMethod == requestType.POST)
             {
-                InitPostDic();
                 int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
                 output = _req.ReadHttpBody(contentLength);
+                if(reqPath == "tradings" && param != "") //special deserialisation, because same route but different json
+                {
+                    PostTrade obj = new PostTrade(AuthLevel.Login);
+                    obj.Param = param;
+                    obj.DeserializeMessageAlternative(output);
+                    obj.Handle(_res, token);
+                    return;
+                }
+                InitPostDic();
                 Handler handleObj = _methodDict[reqPath];
-                handleObj.DeserializeMessage(output);
                 handleObj.Param = param;
+                handleObj.DeserializeMessage(output);
                 handleObj.Handle(_res, token);
             }
             if (_req.ReqMethod == requestType.GET )
@@ -87,7 +95,7 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("packages", new CreatePackage(AuthLevel.Admin));
             this._methodDict.Add("transactions/packages", new AquirePackage(AuthLevel.Login));
             this._methodDict.Add("battles", new PostBattle(AuthLevel.Login));
-            this._methodDict.Add("trades", new PostTrade(AuthLevel.Login));
+            this._methodDict.Add("tradings", new PostTrade(AuthLevel.Login));
         }
 
         private void InitGetDic()
@@ -97,7 +105,7 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("users", new GetUserData(AuthLevel.Login));
             this._methodDict.Add("stats", new GetUserStats(AuthLevel.Login));
             this._methodDict.Add("score", new GetScoreboard(AuthLevel.Login));
-            this._methodDict.Add("trades", new GetTrades(AuthLevel.Login));
+            this._methodDict.Add("tradings", new GetTrades(AuthLevel.Login));
         }
 
         private void InitPutDic()
@@ -108,7 +116,7 @@ namespace MonsterCardGame.Server
 
         private void InitDeleteDic()
         {
-            this._methodDict.Add("trades", new DeleteTrade(AuthLevel.Login));
+            this._methodDict.Add("tradings", new DeleteTrade(AuthLevel.Login));
         }
     }
 }

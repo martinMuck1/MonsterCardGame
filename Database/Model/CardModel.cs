@@ -25,6 +25,11 @@ namespace MonsterCardGame.Database
             this.CardID = cardID;
             this.Username = username;
         }
+        public CardModel(string cardID, int uid)
+        {
+            this.CardID = cardID;
+            this.UID = uid;
+        }
         public void SetUID()
         {
             this.UID = DBHelper.ConvertNameToID(this.Username);

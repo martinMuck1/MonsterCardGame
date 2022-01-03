@@ -76,7 +76,5 @@ namespace MonsterCardGame.Database
             dr.Close();
             return tmpList;
         }
-
-
     }
 }

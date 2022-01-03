@@ -41,9 +41,9 @@ namespace MonsterCardGame.Database
         {
             try
             {
-                string sql = "UPDATE cards SET owner = @username WHERE \"cardID\" = @cardID;";
+                string sql = "UPDATE cards SET owner = @uid WHERE \"cardID\" = @cardID;";
                 using var query = new NpgsqlCommand(sql, _db.Conn);
-                query.Parameters.AddWithValue("username", card.UID);
+                query.Parameters.AddWithValue("uid", card.UID);
                 query.Parameters.AddWithValue("cardID", card.CardID);
                 query.Prepare();
                 query.ExecuteNonQuery();
