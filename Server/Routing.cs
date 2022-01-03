@@ -48,7 +48,7 @@ namespace MonsterCardGame.Server
                 handleObj.Param = param;
                 handleObj.Handle(_res, token);
             }
-            if (_req.ReqMethod == requestType.GET)
+            if (_req.ReqMethod == requestType.GET )
             {
                 InitGetDic();
                 if (reqPath.Contains("?"))
@@ -71,6 +71,13 @@ namespace MonsterCardGame.Server
                 handleObj.Param = param;
                 handleObj.Handle(_res, token);
             }
+            if (_req.ReqMethod == requestType.DELETE)
+            {
+                InitDeleteDic();
+                Handler handleObj = _methodDict[reqPath];
+                handleObj.Param = param;
+                handleObj.Handle(_res, token);
+            }
         }
 
         //mapping routes to handlers
@@ -80,6 +87,7 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("packages", new CreatePackage(AuthLevel.Admin));
             this._methodDict.Add("transactions/packages", new AquirePackage(AuthLevel.Login));
             this._methodDict.Add("battles", new PostBattle(AuthLevel.Login));
+            this._methodDict.Add("trades", new PostTrade(AuthLevel.Login));
         }
 
         private void InitGetDic()
@@ -89,6 +97,7 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("users", new GetUserData(AuthLevel.Login));
             this._methodDict.Add("stats", new GetUserStats(AuthLevel.Login));
             this._methodDict.Add("score", new GetScoreboard(AuthLevel.Login));
+            this._methodDict.Add("trades", new GetTrades(AuthLevel.Login));
         }
 
         private void InitPutDic()
@@ -97,5 +106,9 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("users", new PutUserData(AuthLevel.Login));
         }
 
+        private void InitDeleteDic()
+        {
+            this._methodDict.Add("trades", new DeleteTrade(AuthLevel.Login));
+        }
     }
 }

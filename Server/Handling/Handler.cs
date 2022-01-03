@@ -11,7 +11,7 @@ namespace MonsterCardGame.Server
     public abstract class Handler : IHandler
     {
         protected AuthLevel _authLevel;
-        public string Param { get; set; }
+        public string Param { get; set; } = "";
 
         public Handler(AuthLevel lev)
         {
