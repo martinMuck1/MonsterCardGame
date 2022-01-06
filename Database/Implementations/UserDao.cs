@@ -7,12 +7,10 @@ using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class UserDao : IUserDao
+    public class UserDao : Dao, IUserDao
     {
-        private Database _db;
         public UserDao()
         {
-            _db = Database.getInstance();
         }
         public int CreateUser(UserModel user)
         {
@@ -78,6 +76,7 @@ namespace MonsterCardGame.Database
         }
         public int LoginUser(UserModel user)
         {
+            
             try
             {
                 string sql = "SELECT COUNT(*) FROM users WHERE username = @username AND password = @password;";

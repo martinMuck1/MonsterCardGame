@@ -7,12 +7,10 @@ using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class PackageDao : IPackageDao
+    public class PackageDao : Dao, IPackageDao
     {
-        private Database _db;
         public PackageDao()
         {
-            _db = Database.getInstance();
         }
 
         public int CreatePackage(PackageModel package)

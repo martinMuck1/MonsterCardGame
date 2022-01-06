@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class PackageModel
+    public class Dao
     {
-        public string PackageID { get; private set; }
-
-        public PackageModel(string packageID)
+        protected Database _db;
+        public Dao()
         {
-            this.PackageID = packageID;
+            _db = Database.getInstance();
         }
-
     }
 }

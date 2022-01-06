@@ -7,12 +7,11 @@ using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class CardDao : ICardDao
+    public class CardDao : Dao, ICardDao
     {
-        private Database _db;
+        
         public CardDao()
         {
-            _db = Database.getInstance();
         }
 
         public int CreateCard(CardModel card, string packageID)

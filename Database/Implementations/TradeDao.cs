@@ -7,12 +7,10 @@ using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class TradeDao : ITradeDao
+    public class TradeDao : Dao, ITradeDao
     {
-        private Database _db;
         public TradeDao()
         {
-            _db = Database.getInstance();
         }
         public int CreateTradeOffer(TradeModel model)
         {

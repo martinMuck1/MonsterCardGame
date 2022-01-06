@@ -17,7 +17,7 @@ namespace MonsterCardGame.Server
         public requestType ReqMethod { get; private set; }
 
         public Request(StreamReader reader, out responseType status ) //handle input from client
-        {   //TODO: status gehört hier raus
+        {   
             ReqReader = reader;
             status = GetRequestHeader();
         }

@@ -7,32 +7,33 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MonsterCardGame;
+
 
 namespace MonsterCardGame.Server
 {
     
     class HTTPServer
     {
-        private TcpListener listener;
-        public static Random random = new Random(0);
+        private TcpListener _listener;
+        public static Random random = new Random();    //the seed 0 is on purpose => create same packages always for integration tests
+        private bool _loopVar = true;
 
         public HTTPServer(int portNum)  //start server at 127.0.0.1 at Port 8000
         {
-            listener = new TcpListener(IPAddress.Loopback, portNum);
+            _listener = new TcpListener(IPAddress.Loopback, portNum);
             
         }
-        public async Task StartServerAsync()
+        public void StartServer()
         {
-            listener.Start(5);
-            //Console.CancelKeyPress += (sender, e) => Environment.Exit(0);
-            //HTTPServer.SessionID = Guid.NewGuid().ToString();
-            while (true)
+            _listener.Start(5);
+            //Console.CancelKeyPress += (sender, e) => this._loopVar = false;
+            while (_loopVar)
             {
                 try
                 {   
-                    //listener.Start();
                     Console.WriteLine("waiting for client ....");
-                    var client = await listener.AcceptTcpClientAsync();
+                    var client =  _listener.AcceptTcpClient();
                     Console.WriteLine("new client connected");
                     Thread clientThread = new Thread(new ParameterizedThreadStart(StartClientHandling));
                     clientThread.Start(client);
@@ -43,7 +44,8 @@ namespace MonsterCardGame.Server
                     Console.WriteLine("error occurred: " + exc.Message);
                 }
             }
-            listener.Stop();
+            Database.Database.getInstance().CloseConnection();
+            _listener.Stop();
         }
 
         private static void StartClientHandling(Object obj)
@@ -76,7 +78,7 @@ namespace MonsterCardGame.Server
             Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
             using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
             Response res = new Response(writer);
-            res.SendResponse(responseType.OK,"{message: something}");
+            res.SendResponse(responseType.OK,"{message: something special}");
             for (int i = 0; i < 1000; i++)
             {
                 if(i%100 == 0)

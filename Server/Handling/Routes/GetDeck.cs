@@ -42,7 +42,7 @@ namespace MonsterCardGame.Server
             if(modelDeck == null)
             {
                 Console.WriteLine("No cards in user deck");
-                res.SendResponse(responseType.ERR, "\"message\": \"no cards in your deck yet!\"");
+                res.SendResponse(responseType.OK, "[]");
                 return;
             }
             List<CardModel> cardList = new List<CardModel>();

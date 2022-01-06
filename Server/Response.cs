@@ -25,6 +25,9 @@ namespace MonsterCardGame.Server
         {
             this.Writer = writer;
         }
+        public Response()
+        {
+        }
 
         public void SendBadRequest(responseType resp)
         {

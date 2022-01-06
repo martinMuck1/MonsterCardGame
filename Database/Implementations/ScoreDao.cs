@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class ScoreDao : IScoreDao
+    public class ScoreDao : Dao, IScoreDao
     {
-        private Database _db;
         public ScoreDao()
         {
-            _db = Database.getInstance();
         }
 
         public int CreateScoreStats(UserModel user)
@@ -68,6 +67,7 @@ namespace MonsterCardGame.Database
         //shows oldest battle request
         public BattleModel ShowRequests()
         {
+            //Monitor.Enter(_db);
             BattleModel tmpModel = null;
             string sql = "SELECT bid,\"fk_uid\" FROM battle WHERE request = true ORDER BY timestamp ASC LIMIT 1;";
             using var query = new NpgsqlCommand(sql, _db.Conn);
@@ -88,10 +88,12 @@ namespace MonsterCardGame.Database
                 tmpModel = new BattleModel((string)dr[0], (int)dr[1]);
             }
             dr.Close();
+            //Monitor.Exit(_db);
             return tmpModel;
         }
         public int CreateBattleRequest(BattleModel model)
         {
+            //Monitor.Enter(_db);
             try
             {
                 string sql = "INSERT INTO battle(\"fk_uid\") VALUES (@uid);";
@@ -106,10 +108,12 @@ namespace MonsterCardGame.Database
                 Console.WriteLine("DB Error: User already set request");
                 return -1;
             }
+            //Monitor.Exit(_db);
             return 0;
         }
         public int UpdateScoreBoard(ScoreModel model)
         {
+            //Monitor.Enter(_db);
             try
             {
                 string sql = "UPDATE scoreboard SET elo = elo + @elo,wins = wins + @wins,games = games+ @games,loses = loses+ @loses WHERE \"fk_uid\" = @uid;";
@@ -128,11 +132,13 @@ namespace MonsterCardGame.Database
                 Console.WriteLine("DB Error: Could not update user stats");
                 return -1;
             }
+            //Monitor.Exit(_db);
             return 0;
         }
         
         public int DeleteBattleRequest(BattleModel model)
         {
+            //Monitor.Enter(_db);
             try
             {
                 string sql = "DELETE FROM battle WHERE \"bid\" = @bid;";
@@ -147,6 +153,7 @@ namespace MonsterCardGame.Database
                 Console.WriteLine("DB Error: Could not delete request");
                 return -1;
             }
+            //Monitor.Exit(_db);
             return 0;
         }
     }

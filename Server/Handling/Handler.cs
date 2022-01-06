@@ -43,7 +43,7 @@ namespace MonsterCardGame.Server
                     return false;
                 }
 
-                if (token == "admin-mtcgToken")     //normally this should be in db
+                if (token == "admin-mtcgToken")     //normally this should be persisted in db
                 {
                     Console.WriteLine("Admin Token accepted");
                     return true;
@@ -56,7 +56,7 @@ namespace MonsterCardGame.Server
         public abstract void Handle(Response res, string token);
         public abstract void DeserializeMessage(string message);
 
-
+        //convert List of cards to json
         protected JArray ListToJSON(List<CardModel> cardList){
             JArray array = new JArray();
             foreach (var card in cardList)

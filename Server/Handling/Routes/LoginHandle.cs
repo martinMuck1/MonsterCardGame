@@ -36,7 +36,7 @@ namespace MonsterCardGame.Server
 
             IUserDao userdao = new UserDao();
             int status;
-            if ((status = userdao.LoginUser(new UserModel(_reqUser.userName, _reqUser.password))) != 0)
+            if ((status = userdao.LoginUser(new UserModel(_reqUser.userName, Session.ComputeSha256Hash(_reqUser.password)))) != 0)
             {
                 if(status == -1)
                     res.SendResponse(responseType.ERR, "{\"message\": \"Query got rejected from DB\"}");
@@ -49,9 +49,9 @@ namespace MonsterCardGame.Server
             JObject obj = new JObject();
             obj["message"] = "login was successfull";
             obj["token"] = tmpToken;
-            Session.AddEntry(tmpToken, _reqUser.userName);
-            //HTTPServer.SessionDic.Add(HTTPServer.SessionID, tmpToken);
-            //HTTPServer.Username = _reqUser.userName;
+            if (!Session.SessionDic.ContainsKey(tmpToken))
+                Session.SessionDic.TryAdd(tmpToken, _reqUser.userName);         //this returns boolean => if token already exists doesnt need to rewrite it, so no check needed
+            
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(obj));
         }
     }

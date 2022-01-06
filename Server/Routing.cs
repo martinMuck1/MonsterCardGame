@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -27,6 +28,7 @@ namespace MonsterCardGame.Server
         {
             string output= "", token = "", param = "";
             string reqPath = _req.Header["Path"];
+            Handler handleObj = null;
 
             if (_req.Header.ContainsKey("Authorization"))
                 token = _req.Header["Authorization"];
@@ -47,14 +49,16 @@ namespace MonsterCardGame.Server
                     PostTrade obj = new PostTrade(AuthLevel.Login);
                     obj.Param = param;
                     obj.DeserializeMessageAlternative(output);
-                    obj.Handle(_res, token);
+                    lock (Session._lockObject)
+                    {
+                        obj.Handle(_res, token);
+                    }
                     return;
                 }
                 InitPostDic();
-                Handler handleObj = _methodDict[reqPath];
+                handleObj = _methodDict[reqPath];
                 handleObj.Param = param;
                 handleObj.DeserializeMessage(output);
-                handleObj.Handle(_res, token);
             }
             if (_req.ReqMethod == requestType.GET )
             {
@@ -65,26 +69,30 @@ namespace MonsterCardGame.Server
                     reqPath = wholePath[0];
                     param = wholePath[1];
                 }
-                Handler handleObj = _methodDict[reqPath];
+                handleObj = _methodDict[reqPath];
                 handleObj.Param = param;
-                handleObj.Handle(_res, token);
             }
             if (_req.ReqMethod == requestType.PUT)
             {
                 InitPutDic();
                 int contentLength = Convert.ToInt32(_req.Header["ContentLength"]);
                 output = _req.ReadHttpBody(contentLength);
-                Handler handleObj = _methodDict[reqPath];
+                handleObj = _methodDict[reqPath];
                 handleObj.DeserializeMessage(output);
                 handleObj.Param = param;
-                handleObj.Handle(_res, token);
             }
             if (_req.ReqMethod == requestType.DELETE)
             {
                 InitDeleteDic();
-                Handler handleObj = _methodDict[reqPath];
+                handleObj = _methodDict[reqPath];
                 handleObj.Param = param;
-                handleObj.Handle(_res, token);
+            }
+            if(handleObj != null)
+            {
+                lock (Session._lockObject)
+                {
+                    handleObj.Handle(_res, token);
+                }
             }
         }
 
@@ -92,8 +100,8 @@ namespace MonsterCardGame.Server
         private void InitPostDic(){
             this._methodDict.Add("users", new UserHandle(AuthLevel.noLogin));
             this._methodDict.Add("sessions", new LoginHandle(AuthLevel.noLogin));
-            this._methodDict.Add("packages", new CreatePackage(AuthLevel.Admin));
-            this._methodDict.Add("transactions/packages", new AquirePackage(AuthLevel.Login));
+            this._methodDict.Add("packages", new PostCreatePackage(AuthLevel.Admin));
+            this._methodDict.Add("transactions/packages", new PostAquirePackage(AuthLevel.Login));
             this._methodDict.Add("battles", new PostBattle(AuthLevel.Login));
             this._methodDict.Add("tradings", new PostTrade(AuthLevel.Login));
         }

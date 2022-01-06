@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using MonsterCardGame.Database;
@@ -14,21 +16,34 @@ namespace MonsterCardGame.Server
     }
     public class Session
     {
-        //registers only logged in users in dictionary
-        public static Dictionary<string, string> SessionDic { get; } = new Dictionary<string, string>();
-        public static Dictionary<int, string> UserDic { get; } = new Dictionary<int, string>();
+        public static readonly object _lockObject = new object();           
+        public static ConcurrentDictionary<string, string> SessionDic { get; set; } = new ConcurrentDictionary<string, string>();         //registers only logged in users in dictionary
+        public static ConcurrentDictionary<int, string> UserDic { get; } = new ConcurrentDictionary<int, string>();
 
-        static readonly object _lockObject = new object();
-        public static void AddEntry(string token, string username) {
-            //string tmpGuid =  Guid.NewGuid().ToString();
-            SessionDic.Add(token, username);
-        }
         public static void SetUserDic()
         {
             UserDic.Clear();
             UserDao userDao = new UserDao();
             List<UserModel> modelList = userDao.GetAllUsers();
-            modelList.ForEach((item) => UserDic.Add(item.UID, item.Username));
+            modelList.ForEach((item) => UserDic.TryAdd(item.UID, item.Username));
+        }
+
+        public static string ComputeSha256Hash(string data)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(data));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }

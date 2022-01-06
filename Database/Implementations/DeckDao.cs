@@ -7,12 +7,10 @@ using Npgsql;
 
 namespace MonsterCardGame.Database
 {
-    public class DeckDao : IDeckDao
+    public class DeckDao : Dao, IDeckDao
     {
-        private Database _db;
         public DeckDao()
         {
-            _db = Database.getInstance();
         }
         public int CreateDeck(UserModel user)
         {
