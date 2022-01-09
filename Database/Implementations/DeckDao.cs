@@ -24,7 +24,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: UserDeck already exists");
                 return -1;
             }
@@ -47,7 +47,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Could not set cards in deck");
                 return -1;
             }

@@ -21,7 +21,7 @@ namespace MonsterCardGame.Database
         {
             this.Username = username;
             this.Password = password;
-            this.Token = username + "-mtcgToken";
+            //this.Token = token;
         }
 
         public UserModel(string username)
@@ -41,7 +41,6 @@ namespace MonsterCardGame.Database
             this.Bio = bio;
             this.Image = image;
         }
-
         public void SetUID()
         {
             this.UID = DBHelper.ConvertNameToID(this.Username);

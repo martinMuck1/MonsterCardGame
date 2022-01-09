@@ -41,18 +41,13 @@ namespace MonsterCardGame.Server
             JArray array = new JArray();
             foreach (var singleScore in scoreModel)
             {
-                JObject obj = new JObject();
                 if (!_user.ContainsKey(singleScore.UID))
                 {
                     Console.WriteLine("couldnt get username from dictionary for scoreboard");
                     continue;
                 }
-                obj["username"] = _user[singleScore.UID];
-                obj["elo"] = singleScore.Elo;
-                obj["wins"] = singleScore.Wins;
-                obj["games"] = singleScore.Games;
-                obj["loses"] = singleScore.Loses;
-                array.Add(obj);
+                singleScore.Username = _user[singleScore.UID];
+                array.Add(StatsToJSON(singleScore));
             }
 
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(array));

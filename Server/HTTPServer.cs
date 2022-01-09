@@ -54,8 +54,8 @@ namespace MonsterCardGame.Server
             using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
             using var reader = new StreamReader(client.GetStream());
             Console.WriteLine("Got Request from Client");
-            responseType respType = responseType.ERR;
-            Request req = new Request(reader, out respType);
+            Request req = new Request(reader);
+            responseType respType =req.GetRequestHeader();
             Response res = new Response(writer);
             if (respType == responseType.OK)
             {

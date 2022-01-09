@@ -45,5 +45,14 @@ namespace MonsterCardGame.Server
                 return builder.ToString();
             }
         }
+
+        public static double CalculateRatio(int wins, int loses, int games)
+        {
+            if (games == 0)
+                return 0;
+            int ties = games - wins - loses;
+            double val = (((2 * wins) + ties) / (2 * (double)games));
+            return val;
+        }
     }
 }

@@ -69,5 +69,18 @@ namespace MonsterCardGame.Server
             }
             return array;
         }
+
+        //convert List of stats to JSON
+        protected JObject StatsToJSON(ScoreModel score)
+        {
+            JObject obj = new JObject();
+            obj["username"] = score.Username;
+            obj["elo"] = score.Elo;
+            obj["wins"] = score.Wins;
+            obj["games"] = score.Games;
+            obj["loses"] = score.Loses;
+            obj["ratio"] = Session.CalculateRatio(score.Wins, score.Loses, score.Games).ToString("0.000");
+            return obj;
+        }
     }
 }

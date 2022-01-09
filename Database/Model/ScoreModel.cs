@@ -9,7 +9,7 @@ namespace MonsterCardGame.Database
     public class ScoreModel
 
     {
-        public string Username { get; private set; }
+        public string Username { get;  set; }
         public int UID { get; set; }
         public int Elo { get; private set; }
         public int Wins { get; private set; }

@@ -30,7 +30,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Inserting Cards into DB was not possible");
                 return -1;
             }
@@ -50,7 +50,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                //Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Updating card failed");
                 return -1;
             }

@@ -57,12 +57,22 @@ namespace MonsterCardGame.Server
             }
 
             //pay for package
-            if(userDao.PayWithCoins(user.Username, 5) != 0) 
+            if(userDao.PayWithCoins(user.Username, packageCost) != 0 ) 
             {
                 string message = "{\"message\": \"some error occured while trying to pay coins\"}";
                 res.SendResponse(responseType.ERR, message);
                 return;
             }
+
+            //set entry in transaction history
+            TransactionModel modelTra = new TransactionModel(username, packageCost, aquiredPacakge.PackageID);
+            if(userDao.InsertTransaction(modelTra) != 0)
+            {
+                string message = "{\"message\": \"some error occured while trying to set transaction\"}";
+                res.SendResponse(responseType.ERR, message);
+                return;
+            }
+
             Console.WriteLine($"{username} aquired package { aquiredPacakge.PackageID}");
             JObject obj = new JObject();
             obj["message"] = "Aquired package successfully";
@@ -91,7 +101,7 @@ namespace MonsterCardGame.Server
                 card.SetUID();
                 if (cardao.ChangeCardsOwner(card) != 0)     //change owner in card table
                 {
-                    Console.WriteLine("chaning card Owner went wrong");
+                    Console.WriteLine("changing card Owner went wrong");
                     return null;
                 }
             }

@@ -26,7 +26,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Userstats already exists");
                 return -1;
             }

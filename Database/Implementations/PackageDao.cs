@@ -25,7 +25,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: PackageID exists already");
                 return -1;
             }
@@ -63,7 +63,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Updating package failed");
                 return -1;
             }

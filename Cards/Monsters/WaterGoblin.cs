@@ -12,7 +12,7 @@ namespace MonsterCardGame.Cards
         {
             //Console.WriteLine("Here comes WaterGoblin");
         }
-
+        /*
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {
             if (opponent is FireDragon)
@@ -22,5 +22,6 @@ namespace MonsterCardGame.Cards
             }
             return tmpDamage;
         }
+        */
     }
 }

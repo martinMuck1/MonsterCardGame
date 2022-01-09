@@ -11,6 +11,7 @@ namespace MonsterCardGame.Cards
         public FireDragon(int strenght) : base("Dragon", strenght, ElementType.fire)
         {
         }
+        /*
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {
             if(opponent is FireElves)
@@ -20,5 +21,6 @@ namespace MonsterCardGame.Cards
             }
             return tmpDamage;
         }
+        */
     }
 }

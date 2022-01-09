@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MonsterCardGame.Database.Database">
+    <Position X="7.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABBAAAABAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Database\Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Database.CardDao">
+    <Position X="4" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEQAAQAAAAAAAAAAEAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Database\Implementations\CardDao.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MonsterCardGame.Database.CardModel">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAgAEQA=</HashCode>
+      <FileName>Database\Model\CardModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MonsterCardGame.Database.ICardDao">
+    <Position X="1" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEQAAQAAAAAAAAAAEAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Database\Interface\ICardDao.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

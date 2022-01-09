@@ -12,6 +12,11 @@ namespace MonsterCardGame.Cards
         fire,
         normal 
     }
+    public struct ValMessage
+    {
+        public Type card;
+        public string message;
+    }
     public abstract class AbstractCard : ICard
     {
         public string Name { get; private set; }
@@ -47,8 +52,43 @@ namespace MonsterCardGame.Cards
             return tmpDamage;
         }
 
-        protected virtual int TestSpecialCases(int tmpDamage, AbstractCard opponent)    //base version => returns damage
+        protected  int TestSpecialCases(int tmpDamage, AbstractCard opponent)    //base version => returns damage
         {
+            
+            //Dictionary<Type, ValMessage> list = new Dictionary<Type, ValMessage>();
+            //list.Add(typeof(AbstractSpell), ValMessage);
+            if(this is AbstractSpell)
+            {
+                if (opponent is WaterKraken)
+                {
+                    Console.WriteLine($"{this.Name} has no effect on {opponent.Name}");
+                    return 0;
+                }
+            }
+            if (this is AbstractMonster)
+            {
+                if (this is WaterGoblin && opponent is FireDragon)
+                {
+                    Console.WriteLine($"{this.Name} is to aftraid to attack {opponent.Name} !");
+                    return 0;
+                }
+                if (this is NormalOrk && opponent is NormalWizzard)
+                {
+                    Console.WriteLine($"{this.Name} got hypnothized by {opponent.Name}");
+                    return 0;
+                }
+                if (this is NormalKnight &&  opponent is WaterSpell)
+                {
+                    Console.WriteLine($"{this.Name} drowned due to heavy armor in water !");
+                    return 0;
+                }
+                if (this is FireDragon &&  opponent is FireElves)
+                {
+                    Console.WriteLine($"{opponent.Name} know all tricks of {this.Name} and could manage to dodge attack!");
+                    return 0;
+                }
+            }
+
             return tmpDamage;
         }
 

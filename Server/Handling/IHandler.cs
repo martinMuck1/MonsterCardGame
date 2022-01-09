@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonsterCardGame.Server
 {
-    interface IHandler
+    public interface IHandler
     {
         public bool CheckAuth(Response res, string token);
         public abstract void Handle(Response res, string token);

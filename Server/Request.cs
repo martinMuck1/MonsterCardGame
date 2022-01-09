@@ -14,15 +14,14 @@ namespace MonsterCardGame.Server
     {
         public StreamReader ReqReader { get; private set; }
         public Dictionary<string, string> Header { get; private set; } = new(); 
-        public requestType ReqMethod { get; private set; }
+        public requestType ReqMethod { get; set; }
 
-        public Request(StreamReader reader, out responseType status ) //handle input from client
+        public Request(StreamReader reader ) //handle input from client
         {   
             ReqReader = reader;
-            status = GetRequestHeader();
         }
 
-        private responseType GetRequestHeader()
+        public responseType GetRequestHeader()
         {
             string line;
             int contentLength = 0;

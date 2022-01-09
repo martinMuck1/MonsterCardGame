@@ -16,18 +16,17 @@ namespace MonsterCardGame.Database
         {
             try
             {
-                string sql = "INSERT INTO users(username,password,token) VALUES (@username,@password,@token);";
+                string sql = "INSERT INTO users(username,password) VALUES (@username,@password);";
                 using var query = new NpgsqlCommand(sql, _db.Conn);
                 query.Parameters.AddWithValue("username", user.Username);
                 query.Parameters.AddWithValue("password", user.Password);
-                query.Parameters.AddWithValue("token", user.Token);
                 query.Prepare();
                 query.ExecuteNonQuery();
                 return 0;
             }
             catch (Npgsql.PostgresException e)
             {
-                //Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: User already exists");
                 return -1;
             }
@@ -49,7 +48,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                //Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Updating User Data went wrong");
                 return -1;
             }
@@ -69,7 +68,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Updating coins failed");
                 return -1;
             }
@@ -91,7 +90,7 @@ namespace MonsterCardGame.Database
             }
             catch (Npgsql.PostgresException e)
             {
-                //Console.WriteLine(e);
+                Console.WriteLine(e.Message);
                 Console.WriteLine("DB Error: Username or Password wrong");
                 return -1;
             }
@@ -152,11 +151,26 @@ namespace MonsterCardGame.Database
             return tmpModel;
         }
 
-        /*
-        public int PersistToken(UserModel user)
+        public int InsertTransaction(TransactionModel model)
         {
-
+            try
+            {
+                string sql = "INSERT INTO transaction(amount,fk_user,fk_pid) VALUES (@amount,@uid,@pid);";
+                using var query = new NpgsqlCommand(sql, _db.Conn);
+                query.Parameters.AddWithValue("uid", model.UID);
+                query.Parameters.AddWithValue("amount", model.Amount);
+                query.Parameters.AddWithValue("pid", model.PackageID);
+                query.Prepare();
+                query.ExecuteNonQuery();
+                return 0;
+            }
+            catch (Npgsql.PostgresException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("DB Error: Transaction failed");
+                return -1;
+            }
         }
-        */
+
     }
 }

@@ -12,6 +12,7 @@ namespace MonsterCardGame.Cards
         {
             //Console.WriteLine("Knight entered the room");
         }
+        /*
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)
         {
             if (opponent is WaterSpell)
@@ -21,6 +22,6 @@ namespace MonsterCardGame.Cards
             }
             return tmpDamage;
         }
-
+        */
     }
 }

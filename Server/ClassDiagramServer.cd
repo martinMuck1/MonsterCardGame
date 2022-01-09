@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MonsterCardGame.Server.HTTPServer">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAgAAAAAIAAAAAACAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Server\HTTPServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Server.Request">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAEAAABAAAAAAAAAAAAAAQAAAAAAIAAAA=</HashCode>
+      <FileName>Server\Request.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Server.Response">
+    <Position X="4.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAgAABAAAAAAQAAAAEAAAAAQgAAAAAAACAAAIAEAAAA=</HashCode>
+      <FileName>Server\Response.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Server.Routing">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAUAAAAAAAAAAAAAAAABAAAAAAAEBAAACAAIAAAAE=</HashCode>
+      <FileName>Server\Routing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Server.Session">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEAAAAAAAAIAAAAAACCAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Server\Session.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

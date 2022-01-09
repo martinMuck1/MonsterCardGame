@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MonsterCardGame.Battle.AbstractDeckManager">
+    <Position X="1" Y="1.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEQAIAAAACAAAAQAAAAgAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Battle\AbstractDeckManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Battle.Deck">
+    <Position X="1.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Battle\Deck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Battle.Fight">
+    <Position X="4.25" Y="1.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AIACIAAAAAAAAEAAAIAAAAAAAggEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Battle\Fight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterCardGame.Battle.Players">
+    <Position X="8" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Battle\Players.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

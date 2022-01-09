@@ -59,7 +59,7 @@ namespace MonsterCardGame.Battle
             AbstractDeckManager deckA= _playerA.MyDeck, deckB = _playerB.MyDeck;
             int tmpResult = 0;
             //for demonstration purpose
-            Console.WriteLine("-------- Start Figth---------");
+            Console.WriteLine("-------- Start Fight---------");
             Console.WriteLine($"Player A({_playerA.Name}): ");
             deckA.showAllCards();
             Console.WriteLine($"Player B({_playerB.Name}): ");
@@ -97,6 +97,8 @@ namespace MonsterCardGame.Battle
                         default:
                             break;
                     }
+                    _specialR = false;
+                    _specialRound = new SpecialRound(false);
                     break;
                 }
             }

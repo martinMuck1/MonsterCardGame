@@ -11,7 +11,7 @@ namespace MonsterCardGame.Cards
         public AbstractSpell(string name, int damage, ElementType element):base(name, damage, element)
         {
         }
-
+        /*
         protected override int TestSpecialCases(int tmpDamage, AbstractCard opponent)       //special behavior not needed in child spell class
         {
             if (opponent is WaterKraken)
@@ -21,5 +21,6 @@ namespace MonsterCardGame.Cards
             }
             return tmpDamage;
         }
+        */
     }
 }
