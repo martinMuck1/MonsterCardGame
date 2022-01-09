@@ -23,17 +23,10 @@ namespace MonsterCardGame.Server
 
         public override void Handle(Response res,string token)
         {
-            if (!CheckAuth(res, token))
+            string username = "";
+            if (!CheckAuth(res, token, ref username))
                 return;
 
-            string username;
-            if (!Session.SessionDic.TryGetValue(token, out username))
-            {
-                //key is not in dic => should not happen cause of checkauth
-                Console.WriteLine("Key not in Dictionary");
-                return;
-            }
-          
             ICardDao cardao = new CardDao();
             UserModel modelUser = new UserModel(username);
             List<CardModel> cardList = cardao.ShowAquiredCards(DBHelper.ConvertNameToID(modelUser.Username));

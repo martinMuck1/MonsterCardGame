@@ -12,7 +12,7 @@ namespace MonsterCardGame.Database
         public int UID { get; set; }
         public string TID { get; private set; }
         public int Amount { get; private set; }
-        public string Timestamp { get; private set; }
+        public DateTime Timestamp { get; private set; }
         public string PackageID { get; private set; }
 
 
@@ -23,6 +23,15 @@ namespace MonsterCardGame.Database
             this.PackageID = packageID;
             SetUID();
             //this.Token = token;
+        }
+
+        public TransactionModel(string tid,int uid, int amount, DateTime tstamp, string packageID)
+        {
+            this.TID = tid;
+            this.UID = uid;
+            this.Amount = amount;
+            this.Timestamp = tstamp;
+            this.PackageID = packageID;
         }
 
         public void SetUID()

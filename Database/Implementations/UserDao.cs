@@ -172,5 +172,21 @@ namespace MonsterCardGame.Database
             }
         }
 
+        public List<TransactionModel> GetTransactions(int uid)
+        {
+            List<TransactionModel> tmpModel = new List<TransactionModel>();
+            string sql = "SELECT tid,fk_user,amount,timestamp,fk_pid FROM transaction WHERE fk_user = @uid ORDER BY timestamp DESC;";
+            using var query = new NpgsqlCommand(sql, _db.Conn);
+            query.Parameters.AddWithValue("uid", uid);
+            query.Prepare();
+            NpgsqlDataReader dr = query.ExecuteReader();
+            while (dr.Read())
+            {
+                tmpModel.Add(new TransactionModel((string)dr[0], (int)dr[1], (int)dr[2], (DateTime)dr[3], (string)dr[4]));
+            }
+            dr.Close();
+            return tmpModel;
+        }
+
     }
 }

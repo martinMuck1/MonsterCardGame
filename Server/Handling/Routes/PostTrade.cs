@@ -37,9 +37,9 @@ namespace MonsterCardGame.Server
 
         public override void Handle(Response res,string token)
         {
-            if (!CheckAuth(res, token))
-                return;
             string username = "";
+            if (!CheckAuth(res, token, ref username))
+                return;
             int result;
 
             string cardID = (Param == "") ? _offer.CardToTrade : _tradeCard;

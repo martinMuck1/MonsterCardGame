@@ -114,6 +114,7 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("stats", new GetUserStats(AuthLevel.Login));
             this._methodDict.Add("score", new GetScoreboard(AuthLevel.Login));
             this._methodDict.Add("tradings", new GetTrades(AuthLevel.Login));
+            this._methodDict.Add("transactions", new GetTransactions(AuthLevel.Login));
         }
 
         private void InitPutDic()

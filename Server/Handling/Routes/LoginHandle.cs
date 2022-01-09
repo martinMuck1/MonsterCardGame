@@ -31,7 +31,8 @@ namespace MonsterCardGame.Server
 
         public override void Handle(Response res,string token)
         {
-            if (!CheckAuth(res, token))
+            string username = "";
+            if (!CheckAuth(res, token, ref username))
                 return;
 
             IUserDao userdao = new UserDao();

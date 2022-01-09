@@ -18,7 +18,7 @@ namespace MonsterCardGame.Server
             this._authLevel = lev;
         }
 
-        public bool CheckAuth(Response res, string token)
+        public bool CheckAuth(Response res, string token, ref string username)
         {
             if (_authLevel == AuthLevel.noLogin)
                 return true;
@@ -27,6 +27,13 @@ namespace MonsterCardGame.Server
                 if (!Session.SessionDic.ContainsKey(token))
                 {
                     Console.WriteLine("No login fullfilled => not authorized to succeed with this request");
+                    res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"access denied\"}");
+                    return false;
+                }
+                username = GetUserName(token);
+                if(username == "")
+                {
+                    Console.WriteLine("Username could not be found");
                     res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"access denied\"}");
                     return false;
                 }
@@ -45,12 +52,25 @@ namespace MonsterCardGame.Server
 
                 if (token == "admin-mtcgToken")     //normally this should be persisted in db
                 {
+                    username = GetUserName(token);
                     Console.WriteLine("Admin Token accepted");
                     return true;
                 }
             }
             res.SendResponse(responseType.UNAUTHORIZED, "{\"message\": \"access denied\"}");
             return false;
+        }
+
+        protected string GetUserName(string token)
+        {
+            string username;
+            if (!Session.SessionDic.TryGetValue(token, out username))
+            {
+                //key is not in dic => should not happen cause of checkauth
+                Console.WriteLine("Key not in Dictionary");
+                return "";
+            }
+            return username;
         }
 
         public abstract void Handle(Response res, string token);

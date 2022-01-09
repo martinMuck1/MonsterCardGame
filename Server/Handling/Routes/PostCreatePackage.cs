@@ -38,7 +38,8 @@ namespace MonsterCardGame.Server
         public override void Handle(Response res,string token)
         {
             int errCode;
-            if (!CheckAuth(res, token))
+            string username = "";
+            if (!CheckAuth(res, token, ref username))
                 return;
 
             IPackageDao packdao = new PackageDao();

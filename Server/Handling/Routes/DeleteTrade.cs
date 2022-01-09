@@ -22,11 +22,11 @@ namespace MonsterCardGame.Server
 
         public override void Handle(Response res,string token)
         {
-            if (!CheckAuth(res, token))
-                return;
             string username = "";
+            if (!CheckAuth(res, token, ref username))
+                return;
             TradeModel modelTrade = null;
-            if (!CheckOwnerTrade(token, out username, ref modelTrade))
+            if (!CheckOwnerTrade(token,  username, ref modelTrade))
             {
                 res.SendResponse(responseType.ERR, "{\"message\": \"Cant delete Trade Offer => not yours or not in offers yet!\"}");
                 return;
@@ -43,14 +43,8 @@ namespace MonsterCardGame.Server
         }
 
         /*check if cardID from request belongs to the user */
-        private  bool CheckOwnerTrade(string token, out string username,ref TradeModel model) 
+        private  bool CheckOwnerTrade(string token, string username,ref TradeModel model) 
         {
-            if (!Session.SessionDic.TryGetValue(token, out username))
-            {
-                //key is not in dic => should not happen cause of checkauth
-                Console.WriteLine("Key not in Dictionary");
-                return false;
-            }
             TradeDao tradedao = new TradeDao();
             List<TradeModel> list = tradedao.ShowAllTradeOffers();
             if (this.Param == "" || !list.Select((x) => x.TID).Contains(this.Param)){       //request param is not in trade table

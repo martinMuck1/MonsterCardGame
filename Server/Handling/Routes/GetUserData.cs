@@ -23,18 +23,11 @@ namespace MonsterCardGame.Server
 
         public override void Handle(Response res,string token)
         {
-            if (!CheckAuth(res, token))
+            string username = "";
+            if (!CheckAuth(res, token, ref username))
                 return;
 
-            string username;
-            if (!Session.SessionDic.TryGetValue(token, out username))
-            {
-                //key is not in dic => should not happen cause of checkauth
-                Console.WriteLine("Key not in Dictionary");
-                return;
-            }
-            
-            if(username != this.Param)
+            if (username != this.Param)
             {
                 Console.WriteLine("User tried to access other users data");
                 res.SendResponse(responseType.UNAUTHORIZED, "\"message\": \"you are not allowed to access this area\"");
