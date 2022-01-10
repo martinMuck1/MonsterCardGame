@@ -1,0 +1,115 @@
+-------- Start Fight---------
+Player A(PlayerA): 
+Goblin : 10
+Goblin : 10
+Goblin : 10
+Goblin : 10
+Player B(PlayerB): 
+Goblin : 10
+Goblin : 10
+Goblin : 10
+Goblin : 10
+
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+----------Booster activated vor this round! => playerA card is 3x higher -----------
+Round Winner = Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => 30 vs 10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+No winners this round => Player A: Goblin (10 damage) against Player B: Goblin (10 damage) => same value:  10
+no winner!!
+-------- End Figth---------
