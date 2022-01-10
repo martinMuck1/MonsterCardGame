@@ -57,6 +57,12 @@ namespace MonsterCardGame.Server
             }
             Players playerA = ConvertModelToPlayer(modelBattlePlayer);
             Players playerB = ConvertModelToPlayer(modelBattleOpp);
+            if (playerA == null || playerB == null)
+            {
+                Console.WriteLine("No deck defined");
+                res.SendResponse(responseType.ERR, "{\"message\": \"there is no deck defined for the players\"}");
+                return;
+            }
             StartBattle(playerA, playerB, res);
         }
         //Modeldata => get Player Object with deck for figth logic
@@ -65,6 +71,8 @@ namespace MonsterCardGame.Server
             //get decks from users
             DeckDao deckdao = new DeckDao();
             DeckModel modelDeckPlayer = deckdao.ShowDeckCards(modelBattle.UID);
+            if (modelDeckPlayer == null)
+                return null;
             List<CardModel> cardListPlayer = GetCardModelList(modelDeckPlayer);
 
             //set playerobject (username is not directly known from table)

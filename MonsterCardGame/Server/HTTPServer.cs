@@ -16,7 +16,7 @@ namespace MonsterCardGame.Server
     class HTTPServer
     {
         private TcpListener _listener;
-        public static Random random = new Random();    //the seed 0 is on purpose => create same packages always for integration tests
+        public static Random random = new Random(0);    //the seed 0 is on purpose => create same packages always for integration tests
         private bool _loopVar = true;
 
         public HTTPServer(int portNum)  //start server at 127.0.0.1 at Port 8000

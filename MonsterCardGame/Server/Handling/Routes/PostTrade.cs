@@ -89,7 +89,7 @@ namespace MonsterCardGame.Server
             //further check of card is in deck
             DeckDao deckdao = new DeckDao();
             DeckModel modelD = deckdao.ShowDeckCards(DBHelper.ConvertNameToID(username));
-            if (modelD.Card.Contains(cardID))
+            if (modelD == null || modelD.Card.Contains(cardID))
                 return -2;
 
             return 0;

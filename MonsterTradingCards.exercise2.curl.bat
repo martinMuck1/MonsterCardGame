@@ -23,7 +23,7 @@ curl -X PUT http://localhost:10001/deck --header "Content-Type: application/json
 echo.
 curl -X GET http://localhost:10001/deck --header "Authorization: Basic kienboec-mtcgToken"
 echo.
-curl -X PUT http://localhost:10001/deck --header "Content-Type: application/json" --header "Authorization: Basic altenhof-mtcgToken" -d "[\"3871d45b-b630-4a0d-8bc6-a5fc56b6a043\", \"d04b736a-e874-4137-b191-638e0ff3b4e7\", \"aa9999a0-734c-49c6-8f4a-651864b14e62\", \"1cb6ab86-bdb2-47e5-b6e4-68c5ab389334\"]"
+curl -X PUT http://localhost:10001/deck --header "Content-Type: application/json" --header "Authorization: Basic altenhof-mtcgToken" -d "[\"27051a20-8580-43ff-a473-e986b52f297a\", \"d04b736a-e874-4137-b191-638e0ff3b4e7\", \"aa9999a0-734c-49c6-8f4a-651864b14e62\", \"1cb6ab86-bdb2-47e5-b6e4-68c5ab389334\"]"
 echo.
 curl -X GET http://localhost:10001/deck --header "Authorization: Basic altenhof-mtcgToken"
 echo.
@@ -171,8 +171,8 @@ echo try to trade, not fullfilling requirements (Waterspell)
 curl -X POST http://localhost:10001/tradings/6cd85277-4590-49d4-b0cf-ba0a921faad0 --header "Content-Type: application/json" --header "Authorization: Basic altenhof-mtcgToken" -d "\"e85e3976-7c86-4d06-9a80-641c2019a79f\""
 echo.
 echo.
-echo try to trade (Fire Elve 28 from altenhof)
-curl -X POST http://localhost:10001/tradings/6cd85277-4590-49d4-b0cf-ba0a921faad0 --header "Content-Type: application/json" --header "Authorization: Basic altenhof-mtcgToken" -d "\"27051a20-8580-43ff-a473-e986b52f297a\""
+echo try to trade (Knight 21 from altenhof)
+curl -X POST http://localhost:10001/tradings/6cd85277-4590-49d4-b0cf-ba0a921faad0 --header "Content-Type: application/json" --header "Authorization: Basic altenhof-mtcgToken" -d "\"ce6bcaee-47e1-4011-a49e-5a4d7d4245f3\""
 echo.
 curl -X GET http://localhost:10001/tradings --header "Authorization: Basic kienboec-mtcgToken"
 echo.
