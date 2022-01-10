@@ -9,6 +9,7 @@ namespace MonsterCardGame.Database
 {
     public class UserDao : Dao, IUserDao
     {
+
         public UserDao()
         {
         }
@@ -159,7 +160,7 @@ namespace MonsterCardGame.Database
                 using var query = new NpgsqlCommand(sql, _db.Conn);
                 query.Parameters.AddWithValue("uid", model.UID);
                 query.Parameters.AddWithValue("amount", model.Amount);
-                query.Parameters.AddWithValue("pid", model.PackageID);
+                query.Parameters.AddWithValue("pid",  (object)model.PackageID ?? DBNull.Value);
                 query.Prepare();
                 query.ExecuteNonQuery();
                 return 0;
@@ -182,6 +183,11 @@ namespace MonsterCardGame.Database
             NpgsqlDataReader dr = query.ExecuteReader();
             while (dr.Read())
             {
+                if (dr[4] is DBNull)
+                {
+                    tmpModel.Add(new TransactionModel((string)dr[0], (int)dr[1], (int)dr[2], (DateTime)dr[3], null));
+                    continue;
+                }
                 tmpModel.Add(new TransactionModel((string)dr[0], (int)dr[1], (int)dr[2], (DateTime)dr[3], (string)dr[4]));
             }
             dr.Close();

@@ -17,5 +17,6 @@ namespace MonsterCardGame.Database
         public int UpdateUserData(UserModel user);
         public List<UserModel> GetAllUsers();
         public int InsertTransaction(TransactionModel model);
+        public List<TransactionModel> GetTransactions(int uid);
     }
 }

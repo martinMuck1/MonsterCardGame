@@ -36,7 +36,7 @@ namespace MonsterCardGame.Server
             Send();
         }
 
-        public void SendResponse(responseType rep, string message)
+        public virtual void SendResponse(responseType rep, string message)
         {
             //this.Message = (string)JsonConvert.SerializeObject(message);
             this.Message = message;

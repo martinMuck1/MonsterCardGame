@@ -69,7 +69,7 @@ namespace MonsterCardGame.Server
             return responseType.OK;
         }
 
-        public string ReadHttpBody(int contentLength)
+        public virtual string ReadHttpBody(int contentLength)
         {
             StringBuilder contentStringBuilder = new StringBuilder(10000);
             char[] buffer = new char[1024];

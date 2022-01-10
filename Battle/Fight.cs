@@ -106,7 +106,7 @@ namespace MonsterCardGame.Battle
             return endresult;
         }
 
-        public static int PlayOneRound(AbstractDeckManager deckA, AbstractDeckManager deckB)
+        public int PlayOneRound(AbstractDeckManager deckA, AbstractDeckManager deckB)
         {
             Outcome tmpResult;
             Random rnd = HTTPServer.random;
@@ -144,7 +144,7 @@ namespace MonsterCardGame.Battle
         }
 
         //round = compare adapted damage of cards
-        public static Outcome RoundFight( AbstractCard cardA, AbstractCard cardB)    
+        public virtual Outcome RoundFight( AbstractCard cardA, AbstractCard cardB)    
         {
             Outcome tmpOutcome;
             int tmpDamageCardA = cardA.AdaptDamage(cardB);

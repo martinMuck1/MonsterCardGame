@@ -60,7 +60,7 @@ namespace MonsterCardGame.Server
             }
 
             //set entry in transaction history
-            TransactionModel modelTra = new TransactionModel(username, packageCost, aquiredPacakge.PackageID);
+            TransactionModel modelTra = new TransactionModel(username, -packageCost, aquiredPacakge.PackageID);
             if(userDao.InsertTransaction(modelTra) != 0)
             {
                 string message = "{\"message\": \"some error occured while trying to set transaction\"}";

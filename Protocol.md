@@ -45,7 +45,7 @@ Although a better solution for handling the database connection could have been 
 *DAO Pattern: Business logic and model handling need to be strictly separated, therfore it is not allowed to mix these classes (e.g. cardModel and Handler Class of Card)
 *Singleton Pattern is useful to create only one object of a class and share the same connection
 *Be careful with asynch code => firstly I tried to listen to incoming tcpclients asynch and created afterwards the threads. 
-*LINQ in combination with lambda expressions are really useful to handle lists => compressed code
+*LINQ in combination with lambda expressions are really useful to handle lists => better overview over code
 
 ## Unit Tests
 Most of the Unit Tests were implemented for the battle logic, because the description made it very clear which features should be fullfilled. The battle logic is one of the main features of the whole project.
@@ -68,7 +68,7 @@ So after round 5 is played, the player with more loses is selected and gets, in 
 The usage of the feature is restricted to only once in the whole game. 
 
 Time spent: (tracked with toggl track)
-95h
+105h
 
 Github Link: 
 https://github.com/mucki024/MonsterCardGame.git

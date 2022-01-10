@@ -35,11 +35,18 @@ namespace MonsterCardGame.Server
                 foreach (var trade in modelTradeList)
                 {
                     JObject obj = new JObject();
+                    string user = "";
                     obj["tradeID"] = trade.TID;
                     obj["cardID"] = trade.CardToTrade;
                     obj["cardType"] = trade.CardType;
                     obj["minDamage"] = trade.MinDamage;
-                    obj["user"] = trade.UID;
+                    Session.SetUserDic();
+                    if (!Session.UserDic.TryGetValue(trade.UID, out user))
+                    {
+                        Console.WriteLine("User unkown");
+                        array.Add(obj);
+                    }
+                    obj["user"] = user;
                     array.Add(obj);
                 }
             }

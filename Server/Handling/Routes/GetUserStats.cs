@@ -30,6 +30,7 @@ namespace MonsterCardGame.Server
             IScoreDao scoredao = new ScoreDao();
             ScoreModel scoreModel = new ScoreModel(username);
             scoreModel = scoredao.ShowUserStats(scoreModel.UID);
+            scoreModel.Username = username;
             res.SendResponse(responseType.OK, JsonConvert.SerializeObject(StatsToJSON(scoreModel)));
             Console.WriteLine("Sent User Stats");
         }

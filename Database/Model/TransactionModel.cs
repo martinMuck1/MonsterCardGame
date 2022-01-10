@@ -15,7 +15,7 @@ namespace MonsterCardGame.Database
         public DateTime Timestamp { get; private set; }
         public string PackageID { get; private set; }
 
-
+        //Insert package transaction
         public TransactionModel(string username, int amount, string packageID)
         {
             this.Username = username;

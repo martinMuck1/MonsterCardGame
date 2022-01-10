@@ -104,6 +104,7 @@ namespace MonsterCardGame.Server
             this._methodDict.Add("transactions/packages", new PostAquirePackage(AuthLevel.Login));
             this._methodDict.Add("battles", new PostBattle(AuthLevel.Login));
             this._methodDict.Add("tradings", new PostTrade(AuthLevel.Login));
+            this._methodDict.Add("transactions", new PostTransaction(AuthLevel.Admin));
         }
 
         private void InitGetDic()
